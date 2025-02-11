@@ -15,11 +15,8 @@
             </div>
         </form>
 
-        <div class="border-red-600 flex justify-between">
+        <div class="border-red-600 border-l-4 flex justify-between">
             <h2 class="ms-2 text-black dark:text-white font-semibold text-xl">ANIME</h2>
-        </div>
-        <div class="position-relative border-b border-gray-400">
-            <hr class="thick-hr">
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
 

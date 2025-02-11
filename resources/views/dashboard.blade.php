@@ -16,17 +16,14 @@
         </form>
 
         <!-- Start movies Page -->
-        <div id="movies" class="my-8 md:my-16">
-            <div class="flex justify-between">
-                <h2 class="text-black dark:text-white font-semibold text-lg md:text-xl">MOVIES</h2>
+        <div id="movies" class="my-16 pembatas md:my-16">
+            <div class="flex justify-between border-l-4 border-red-600">
+                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">MOVIES</h2>
                 <a href="movies">
-                    <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">Lihat Semua</span>
+                    <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                 </a>
             </div>
-            <div class="position-relative border-b border-gray-400">
-                <hr class="thick-hr">
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
 
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="detail" class="block">
@@ -61,17 +58,14 @@
         <!-- End movies Page -->
 
         <!-- Start series page -->
-        <div id="series" class="my-8 md:my-16">
-            <div class="flex justify-between">
-                <h2 class="text-black dark:text-white font-semibold text-lg md:text-xl">SERIES</h2>
+        <div id="series" class="my-16 pembatas md:my-16">
+            <div class="flex justify-between border-l-4 border-red-600">
+                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">SERIES</h2>
                 <a href="series">
-                    <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">Lihat Semua</span>
+                    <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                 </a>
             </div>
-            <div class="position-relative border-b border-gray-400">
-                <hr class="thick-hr">
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
 
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="detail" class="block">
@@ -106,17 +100,14 @@
         <!-- End series page -->
 
         <!-- Start anime Page -->
-        <div id="anime" class="my-8 md:my-16">
-            <div class="flex justify-between">
-                <h2 class="text-black dark:text-white font-semibold text-lg md:text-xl">ANIME</h2>
+        <div id="anime" class="my-16 pembatas md:my-16">
+            <div class="flex justify-between border-l-4 border-red-600">
+                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">ANIME</h2>
                 <a href="anime">
-                    <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">Lihat Semua</span>
+                    <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                 </a>
             </div>
-            <div class="position-relative border-b border-gray-400">
-                <hr class="thick-hr">
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
 
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="detail" class="block">
