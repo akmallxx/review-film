@@ -19,7 +19,7 @@ var swiper = new Swiper(".mySwiper", {
       },
     breakpoints: {
         640: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 10,
         },
         768: {
@@ -27,8 +27,8 @@ var swiper = new Swiper(".mySwiper", {
             spaceBetween: 15,
         },
         1024: {
-            slidesPerView: 5,
-            spaceBetween: 20,
+            slidesPerView: 7,
+            spaceBetween: 30,
         },
     },
 });

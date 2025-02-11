@@ -91,4 +91,11 @@
 
 .pembatas {
     margin-bottom: 60px;
+}   
+
+.thick-hr {
+    border-top: 5px solid rgb(167, 167, 167);
+    width: 5%; /* 10% dari lebar kontainer */
+    margin: 0; /* Menghilangkan margin */
+    border-radius: 5px; /* Membuat sudut rounded */
 }

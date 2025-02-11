@@ -30,7 +30,7 @@
 </head>
 
 <body class="font-sans antialiased bg-neutral-200 dark:neutral-800">
-    <div class="min-h-screen bg-neutral-100 dark:bg-neutral-900">
+    <div class="min-h-screen bg-neutral-200 dark:bg-neutral-900">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
