@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GenreRelation extends Model
+class Genre_relation extends Model
 {
     use HasFactory;
     
@@ -22,6 +22,6 @@ class GenreRelation extends Model
     // Relasi ke Genre
     public function genre()
     {
-        return $this->belongsTo(Genre::class);
+        return $this->belongsTo(Genre::class, 'id_genre');
     }
 }

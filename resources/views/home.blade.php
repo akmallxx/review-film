@@ -24,35 +24,26 @@
                 </a>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
-
+                @foreach ($movies as $movie)
                 <div class="relative max-w-sm overflow-hidden group">
-                    <a href="detail" class="block">
+                    <a href="{{ route('movies.detail', $movie->id) }}" class="block">
                         <div class="w-full relative">
+                            <!-- Poster -->
                             <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="https://asset.tix.id/wp-content/uploads/2025/01/f3e9f805-8c13-4cb5-a50e-815d26b92712-600x885.webp"
-                                alt="COMPANION" />
+                                src="{{ $movie->poster }}"
+                                alt="{{ $movie->judul }}" />
                         </div>
                         <div class="dark:text-white bg-neutral-100 dark:bg-neutral-900 p-1">
-                            <h5 class="text-sm font-bold drop-shadow">Companion</h5>
+                            <!-- Judul -->
+                            <h5 class="text-sm font-bold drop-shadow">{{ $movie->judul }}</h5>
+                            <!-- Tahun Rilis -->
                             <p class="text-xs dark:text-gray-300">
-                                2024
+                                {{ $movie->tahun_rilis }}
                             </p>
                         </div>
                     </a>
                 </div>
-
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                <div class="swiper-slide">Slide 4</div>
-                <div class="swiper-slide">Slide 5</div>
-                <div class="swiper-slide">Slide 6</div>
-                <div class="swiper-slide">Slide 7</div>
-                <div class="swiper-slide">Slide 8</div>
-                <div class="swiper-slide">Slide 9</div>
-                <div class="swiper-slide">Slide 10</div>
-                <div class="swiper-slide">Slide 11</div>
-                <div class="swiper-slide">Slide 12</div>
-
+                @endforeach
             </div>
         </div>
         <!-- End movies Page -->
