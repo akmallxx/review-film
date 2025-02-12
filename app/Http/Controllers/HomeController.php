@@ -21,6 +21,25 @@ class HomeController extends Controller
         return view('home', get_defined_vars());
     }
 
+    public function movies()
+    {
+        $movies = Film::latest()->where('kategori_film', 'movies')->paginate(12);
+
+        return view('movies', get_defined_vars());
+    }
+    public function series()
+    {
+        $series = Film::latest()->where('kategori_film', 'series')->paginate(12);
+
+        return view('series', get_defined_vars());
+    }
+    public function animes()
+    {
+        $animes = Film::latest()->where('kategori_film', 'anime')->paginate(12);
+
+        return view('anime', get_defined_vars());
+    }
+
     public function show($id)
     {
         $film = Film::findOrFail($id);
