@@ -20,68 +20,31 @@
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
 
+            @foreach ($movies as $movie)
             <div class="relative max-w-sm overflow-hidden group">
-                <a href="detail" class="block">
+                <a href="{{ route('film.detail', $movie->id) }}" class="block">
                     <div class="w-full relative">
+                        <!-- Poster -->
                         <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                            src="https://asset.tix.id/wp-content/uploads/2025/01/f3e9f805-8c13-4cb5-a50e-815d26b92712-600x885.webp"
-                            alt="COMPANION" />
+                            src="{{ $movie->poster }}"
+                            alt="{{ $movie->judul }}" />
                     </div>
                     <div class="dark:text-white bg-neutral-100 dark:bg-neutral-900 p-1">
-                        <h5 class="text-sm font-bold drop-shadow">Companion</h5>
+                        <!-- Judul -->
+                        <h5 class="text-sm font-bold drop-shadow">{{ $movie->judul }}</h5>
+                        <!-- Tahun Rilis -->
                         <p class="text-xs dark:text-gray-300">
-                            2024
+                            {{ $movie->tahun_rilis }}
                         </p>
                     </div>
                 </a>
             </div>
-
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>
-            <div class="swiper-slide">Slide 10</div>
-            <div class="swiper-slide">Slide 11</div>
-            <div class="swiper-slide">Slide 12</div>
+            @endforeach
 
         </div>
         <nav aria-label="Page navigation example">
             <ul class="flex items-center -space-x-px h-10 text-base justify-center mt-6">
-                <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-neutral-500 bg-white border border-e-0 border-neutral-300 rounded-s-lg hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white">
-                        <span class="sr-only">Previous</span>
-                        <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
-                        </svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-neutral-500 bg-white border border-neutral-300 hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white">1</a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-neutral-500 bg-white border border-neutral-300 hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white">2</a>
-                </li>
-                <li>
-                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-neutral-700 dark:bg-neutral-700 dark:text-white">3</a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-neutral-500 bg-white border border-neutral-300 hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white">4</a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-neutral-500 bg-white border border-neutral-300 hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white">5</a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-neutral-500 bg-white border border-neutral-300 rounded-e-lg hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white">
-                        <span class="sr-only">Next</span>
-                        <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-                        </svg>
-                    </a>
-                </li>
+                {{ $movies->links() }}
             </ul>
         </nav>
     </div>

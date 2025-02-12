@@ -96,8 +96,14 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('genre')" :active="request()->routeIs('genre')">
-                {{ __('Genre List') }}
+            <x-responsive-nav-link :href="route('movies')" :active="request()->routeIs('movies')">
+                {{ __('Movies') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('series')" :active="request()->routeIs('series')">
+                {{ __('Series') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('anime')" :active="request()->routeIs('anime')">
+                {{ __('Anime') }}
             </x-responsive-nav-link>
         </div>
 

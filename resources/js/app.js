@@ -32,3 +32,21 @@ var swiper = new Swiper(".mySwiper", {
         },
     },
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('default-modal');
+    const closeButton = modal.querySelector('[data-modal-hide="default-modal"]');
+    const video = modal.querySelector('video');
+
+    closeButton.addEventListener('click', function() {
+        video.pause();
+        video.currentTime = 0; // Mengembalikan video ke awal
+    });
+
+    // Jika modal ditutup dengan cara lain (misalnya klik di luar modal)
+    modal.addEventListener('hidden', function() {
+        video.pause();
+        video.currentTime = 0;
+    });
+});

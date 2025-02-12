@@ -10,12 +10,24 @@ class Film extends Model
     use HasFactory;
 
     protected $table = "films";
-    protected $primaryKey = 'id_film'; // Pastikan kolom id_film ada di database, jika tidak gunakan 'id'
+    protected $primaryKey = 'id'; // Pastikan kolom id_film ada di database, jika tidak gunakan 'id'
 
     // Kolom-kolom yang dapat diisi secara mass assignment
     protected $fillable = [
-        'judul', 'poster', 'deskripsi', 'tahun_rilis', 'durasi', 'pencipta', 'trailer', 'id_users', 'kategori_umur'
+        'judul', 'poster', 'deskripsi', 'kategori_film', 'tahun_rilis', 'durasi', 'pencipta', 'trailer', 'id_users', 'kategori_umur'
     ];
+
+    public function getDurasiFormatAttribute()
+    {
+        $jam = floor($this->durasi / 60);
+        $menit = $this->durasi % 60;
+
+        if ($jam > 0) {
+            return "{$jam}h {$menit}min";
+        } else {
+            return "{$menit}min";
+        }
+    }
 
     // Relasi ke User
     public function user()

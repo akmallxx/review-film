@@ -20,14 +20,6 @@ class UserSeeder extends Seeder
             Role::firstOrCreate(['name' => $role]);
         }
 
-        // Buat user biasa
-        $user = User::firstOrCreate([
-            'name' => 'User Biasa',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password123'),
-        ]);
-        $user->assignRole('user');
-
         // Buat admin
         $admin = User::firstOrCreate([
             'name' => 'Admin',
@@ -43,5 +35,13 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password123'),
         ]);
         $author->assignRole('author');
+
+        // Buat user biasa
+        $user = User::firstOrCreate([
+            'name' => 'User Biasa',
+            'email' => 'user@example.com',
+            'password' => Hash::make('password123'),
+        ]);
+        $user->assignRole('user');
     }
 }
