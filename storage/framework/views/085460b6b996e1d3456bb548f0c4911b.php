@@ -1,5 +1,14 @@
-@section('title', $film->judul . ' - ' . config('app.name', 'Laravel'))
-<x-app-layout>
+<?php $__env->startSection('title', $film->judul . ' - ' . config('app.name', 'Laravel')); ?>
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -7,31 +16,32 @@
                 <div class="m-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
                     <div class="p-4">
                         <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105 rounded-xl shadow-sm"
-                            src="{{ $film->poster }}" alt="{{ $film->judul }}" />
+                            src="<?php echo e($film->poster); ?>" alt="<?php echo e($film->judul); ?>" />
                     </div>
                     <div class="col-span-2 sm:col-span-1 lg:col-span-2">
                         <h2
                             class="text-lg font-semibold tracking-tight text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl mb-6">
-                            {{ $film->judul }} <span class="text-md">({{ $film->tahun_rilis }})</span>
+                            <?php echo e($film->judul); ?> <span class="text-md">(<?php echo e($film->tahun_rilis); ?>)</span>
                         </h2>
 
                         <!-- Kategori Film -->
                         <span
-                            class="bg-red-700 text-white text-sm font-medium me-2 px-2.5 pb-1 pt-0.5 rounded-full">{{ ucfirst($film->kategori_film) }}</span>
+                            class="bg-red-700 text-white text-sm font-medium me-2 px-2.5 pb-1 pt-0.5 rounded-full"><?php echo e(ucfirst($film->kategori_film)); ?></span>
 
                         <!-- Kategori Umur -->
                         <span
-                            class="bg-orange-600 text-white text-sm font-medium me-2 px-2.5 pb-1 pt-0.5 rounded-full">{{ ucfirst($film->kategori_umur) }}</span>
+                            class="bg-orange-600 text-white text-sm font-medium me-2 px-2.5 pb-1 pt-0.5 rounded-full"><?php echo e(ucfirst($film->kategori_umur)); ?></span>
 
                         <!-- Genres -->
-                        @foreach ($genres as $genre)
+                        <?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <span
-                                class="bg-cyan-700 text-white text-sm font-medium me-2 px-2.5 pb-1 pt-0.5 rounded-full">{{ $genre->title }}</span>
-                        @endforeach
+                                class="bg-cyan-700 text-white text-sm font-medium me-2 px-2.5 pb-1 pt-0.5 rounded-full"><?php echo e($genre->title); ?></span>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                        <p class="text-sm sm:text-base text-black dark:text-neutral-200 pt-3">{{ $film->deskripsi }}</p>
+                        <p class="text-sm sm:text-base text-black dark:text-neutral-200 pt-3"><?php echo e($film->deskripsi); ?></p>
                         <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 py-6">
-                            Pencipta: {{ $film->pencipta }}
+                            Pencipta: <?php echo e($film->pencipta); ?>
+
                         </p>
 
                         <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
@@ -39,15 +49,15 @@
                             <i class="bi bi-play-circle"></i> Watch Trailer
                         </button>
                         <span class="me-6 ms-4 text-neutral-500 text-2xl">|</span> <!-- Separator -->
-                        <span class="dark:text-neutral-400 text-md">{{ $film->durasi_format }}</span>
+                        <span class="dark:text-neutral-400 text-md"><?php echo e($film->durasi_format); ?></span>
                         <div class="flex flex-wrap items-center mt-6">
                             <p class="flex text-lg md:text-xl drop-shadow-md">
-                                @for ($i = 1; $i <= 5; $i++)
-                                                                @php
+                                <?php for($i = 1; $i <= 5; $i++): ?>
+                                                                <?php
                                                                     $color = $i <= 4 ? 'text-yellow-400' : 'text-neutral-600';
-                                                                @endphp
-                                                                <span class="fa fa-star {{ $color }} text-2xl md:text-4xl px-0.5 md:px-1"></span>
-                                @endfor
+                                                                ?>
+                                                                <span class="fa fa-star <?php echo e($color); ?> text-2xl md:text-4xl px-0.5 md:px-1"></span>
+                                <?php endfor; ?>
 
                             </p>
                             <p class="text-xl md:text-2xl drop-shadow-md ms-2 md:ms-3 mt-1 md:mt-2 dark:text-white">
@@ -80,24 +90,24 @@
                             </div>
                             <!-- Modal body -->
                             <div class="p-4 md:p-5 space-y-4">
-                                @if (Str::contains($film->trailer, 'youtube.com') || Str::contains($film->trailer, 'youtu.be'))
-                                                                @php
+                                <?php if(Str::contains($film->trailer, 'youtube.com') || Str::contains($film->trailer, 'youtu.be')): ?>
+                                                                <?php
                                                                     preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $film->trailer, $matches);
                                                                     $youtubeId = $matches[1] ?? null;
-                                                                @endphp
+                                                                ?>
 
-                                                                @if ($youtubeId)
-                                                                    <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/{{ $youtubeId }}"
+                                                                <?php if($youtubeId): ?>
+                                                                    <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/<?php echo e($youtubeId); ?>"
                                                                         frameborder="0" allowfullscreen></iframe>
-                                                                @else
+                                                                <?php else: ?>
                                                                     <p>Invalid YouTube URL</p>
-                                                                @endif
-                                @else
+                                                                <?php endif; ?>
+                                <?php else: ?>
                                     <video class="w-full" controls>
-                                        <source src="{{ $film->trailer }}" type="video/mp4">
+                                        <source src="<?php echo e($film->trailer); ?>" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
-                                @endif
+                                <?php endif; ?>
                             </div>
 
                         </div>
@@ -130,10 +140,10 @@
                         <h3 class="text-2xl font-semibold text-white mb-4">Komentar</h3>
 
                         <div class="mt-8 pb-8 border-b relative">
-                            @guest
+                            <?php if(auth()->guard()->guest()): ?>
                                 <h2 class="text-red-700 font-semibold text-center text-lg my-4">Harap login terlebih
                                     dahulu untuk mengirim komentar</h2>
-                            @else
+                            <?php else: ?>
                                 <!-- Comment Input Section -->
                                 <div class="flex items-start space-x-4">
                                     <!-- User Avatar -->
@@ -155,7 +165,7 @@
                                             Komentar</button>
                                     </div>
                                 </div>
-                            @endguest
+                            <?php endif; ?>
                         </div>
 
 
@@ -207,4 +217,13 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?><?php /**PATH D:\NGODING\review-film\resources\views/detail.blade.php ENDPATH**/ ?>
