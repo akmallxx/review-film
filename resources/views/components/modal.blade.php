@@ -1,11 +1,11 @@
 {{-- 
     <x-modal name="exampleModal" :show="false" maxWidth="lg">
         <div class="p-6">
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Judul Modal</h2>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Konten modal di sini...</p>
+            <h2 class="text-lg font-medium text-neutral-900 dark:text-neutral-100">Judul Modal</h2>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">Konten modal di sini...</p>
             
             <div class="mt-4">
-                <button x-on:click="$dispatch('close-modal', 'exampleModal')" class="px-4 py-2 bg-gray-800 text-white rounded">Tutup</button>
+                <button x-on:click="$dispatch('close-modal', 'exampleModal')" class="px-4 py-2 bg-neutral-800 text-white rounded">Tutup</button>
             </div>
         </div>
     </x-modal>
@@ -73,12 +73,12 @@ $maxWidth = [
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
     >
-        <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
+        <div class="absolute inset-0 bg-neutral-500 dark:bg-neutral-900 opacity-75"></div>
     </div>
 
     <div
         x-show="show"
-        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+        class="mb-6 bg-white dark:bg-neutral-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"

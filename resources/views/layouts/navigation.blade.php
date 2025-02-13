@@ -1,7 +1,4 @@
-<nav x-data="{ open: false, scrolled: false }"
-    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
-    :class="scrolled ? 'bg-white dark:bg-neutral-800 shadow-lg' : 'bg-transparent'"
-    class="sticky top-0 z-50 transition duration-300">
+<nav class="sticky top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,3 +1,4 @@
+@section('title', 'Movies - ' . config('app.name', 'Laravel'))
 <x-app-layout>
 
     <div class="p-12">
