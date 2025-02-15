@@ -1,7 +1,7 @@
 <nav class="sticky top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
 
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
         <div class="flex justify-between h-16">
             <!-- Logo -->
             <div class="shrink-0 flex items-center">
@@ -46,6 +46,13 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+
+                        <!-- Check if user has 'admin' role -->
+                        @if(auth()->user()->hasRole('admin'))
+                        <x-dropdown-link :href="route('admin')">
+                            {{ __('Admin Dashboard') }}
+                        </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -133,6 +140,13 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <!-- Check if user has 'admin' role -->
+                @if(auth()->user()->hasRole('admin'))
+                <x-dropdown-link :href="route('admin')">
+                    {{ __('Admin Dashboard') }}
+                </x-dropdown-link>
+                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

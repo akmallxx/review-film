@@ -18,4 +18,14 @@ export default {
     },
 
     plugins: [forms],
+    safelist: [
+        'bg-yellow-400', 
+        'text-center', 
+        'md:grid-cols-3', 
+        'hidden',
+        'block',
+        'border', 
+        'border-gray-300'
+      ],
+    
 };

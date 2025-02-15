@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Film extends Model
 {
@@ -14,7 +15,18 @@ class Film extends Model
 
     // Kolom-kolom yang dapat diisi secara mass assignment
     protected $fillable = [
-        'judul', 'poster', 'deskripsi', 'kategori_film', 'tahun_rilis', 'durasi', 'pencipta', 'trailer', 'id_users', 'kategori_umur'
+        'judul',
+        'slug',
+        'total_episode',
+        'poster',
+        'deskripsi',
+        'kategori_film',
+        'tahun_rilis',
+        'durasi',
+        'pencipta',
+        'trailer',
+        'id_users',
+        'kategori_umur'
     ];
 
     public function getDurasiFormatAttribute()
@@ -33,7 +45,7 @@ class Film extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_users', 'id');
-    }    
+    }
 
     // Relasi ke Genre melalui tabel pivot
     public function genres()
@@ -51,5 +63,14 @@ class Film extends Model
     public function castings()
     {
         return $this->hasMany(Casting::class, 'id_film'); // Tidak perlu mendefinisikan foreign key dan local key jika mengikuti konvensi default
+    }
+
+    // Akses poster sebagai URL yang benar
+    public function getPosterUrlAttribute()
+    {
+        if (filter_var($this->poster, FILTER_VALIDATE_URL)) {
+            return $this->poster; // Jika sudah berupa URL, langsung dikembalikan
+        }
+        return asset('storage/' . $this->poster);
     }
 }
