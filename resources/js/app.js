@@ -16,7 +16,7 @@ var swiper = new Swiper(".mySwiper", {
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
-      },
+    },
     breakpoints: {
         640: {
             slidesPerView: 3,
@@ -33,20 +33,28 @@ var swiper = new Swiper(".mySwiper", {
     },
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("default-modal");
+    const closeButton = modal.querySelector(
+        '[data-modal-hide="default-modal"]'
+    );
+    const video = modal.querySelector("video");
+    const iframe = modal.querySelector("iframe");
 
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('default-modal');
-    const closeButton = modal.querySelector('[data-modal-hide="default-modal"]');
-    const video = modal.querySelector('video');
+    function stopVideo() {
+        if (video) {
+            video.pause();
+            video.currentTime = 0; // Mengembalikan video ke awal
+        }
+        if (iframe) {
+            const src = iframe.src;
+            iframe.src = ""; // Reset src untuk menghentikan video
+            iframe.src = src; // Mengembalikan src untuk menjaga elemen tetap aktif
+        }
+    }
 
-    closeButton.addEventListener('click', function() {
-        video.pause();
-        video.currentTime = 0; // Mengembalikan video ke awal
-    });
+    closeButton.addEventListener("click", stopVideo);
 
     // Jika modal ditutup dengan cara lain (misalnya klik di luar modal)
-    modal.addEventListener('hidden', function() {
-        video.pause();
-        video.currentTime = 0;
-    });
+    modal.addEventListener("hidden", stopVideo);
 });

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('poster');
             $table->string('judul');
+            $table->string('slug');
             $table->text('deskripsi');
             $table->text('kategori_film');
             $table->year('tahun_rilis');
