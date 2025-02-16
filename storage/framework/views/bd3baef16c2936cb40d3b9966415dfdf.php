@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <link rel="icon" href="{{ asset('images/logo/Y-logo.png') }}" type="image/png">
-    <title>@yield('title', config('app.name', 'Laravel'))</title>
+    <link rel="icon" href="<?php echo e(asset('images/logo/Y-logo.png')); ?>" type="image/png">
+    <title><?php echo $__env->yieldContent('title', config('app.name', 'Laravel')); ?></title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -30,23 +30,23 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 </head>
 
 <body class="bg-neutral-200 dark:bg-neutral-900">
-    @include('.layouts.admin.navbar')
+    <?php echo $__env->make('.layouts.admin.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="flex h-screen">
-        @include('layouts.admin.sidebar')
+        <?php echo $__env->make('layouts.admin.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="flex-1 flex flex-col">
             <main class="p-6">
                 <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md">
-                    @yield('content')
+                    <?php echo $__env->yieldContent('content'); ?>
                 </div>
             </main>
         </div>
     </div>
 
-    @yield('scripts')
+    <?php echo $__env->yieldContent('scripts'); ?>
 
     <!-- Tambahkan SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -59,4 +59,4 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 </body>
 
-</html>
+</html><?php /**PATH /home/eroge/Documents/review-film/resources/views/layouts/admin.blade.php ENDPATH**/ ?>

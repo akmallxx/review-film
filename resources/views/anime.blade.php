@@ -50,7 +50,7 @@
         @else
         <div class="mx-auto py-6 px-4 sm:px-6 lg:px-0">
             <div class="flex justify-between border-l-4 border-red-600">
-                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">MOVIES</h2>
+                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">ANIME</h2>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
 
