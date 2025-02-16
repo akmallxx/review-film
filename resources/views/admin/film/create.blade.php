@@ -35,7 +35,7 @@
             <!-- Input Poster URL -->
             <div id="poster_url" class="mb-5" style="{{ $film->poster_method == 'url' ? '' : 'display: none;' }}">
                 <label for="poster_url_input" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Poster URL</label>
-                <input type="text" name="poster_url" id="poster_url_input" value="{{ $film->poster_url }}" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan URL Poster" required />
+                <input type="text" name="poster_url" id="poster_url_input" value="{{ str_starts_with($film->poster_url, 'http://127.0.0.1:8000/storage') ? '' : $film->poster_url }}" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan URL Poster" required />
             </div>
 
             <!-- Input Poster File Upload -->
@@ -56,14 +56,9 @@
             </div>
 
             <div class="grid md:grid-cols-2 md:gap-6">
-                <div class="mb-5">
-                    <label for="kategori_film" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Kategori Film</label>
-                    <select name="kategori_film" id="kategori_film" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                        <option value="" disabled>Pilih Kategori</option>
-                        <option value="movies" {{ $film->kategori_film == 'movies' ? 'selected' : '' }}>Movies</option>
-                        <option value="series" {{ $film->kategori_film == 'series' ? 'selected' : '' }}>Series</option>
-                        <option value="anime" {{ $film->kategori_film == 'anime' ? 'selected' : '' }}>Anime</option>
-                    </select>
+            <div class="mb-5">
+                    <label for="total_episode" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Total Episode</label>
+                    <input type="number" name="total_episode" id="total_episode" value="{{ $film->total_episode }}" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Total Episode" required />
                 </div>
                 <div class="mb-5">
                     <label for="tahun_rilis" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Tahun Rilis</label>
@@ -90,11 +85,23 @@
             <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="mb-5">
                     <label for="kategori_umur" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Kategori Umur</label>
-                    <input type="text" name="kategori_umur" id="kategori_umur" value="{{ $film->kategori_umur }}" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Kategori Umur" required />
+                    <select name="kategori_umur" id="kategori_umur" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="" @php echo $id ? '' : 'selected'; @endphp disabled>Pilih Kategori</option>
+                        <option value="13+" {{ $film->kategori_umur == '13+' ? 'selected' : '' }}>13+</option>
+                        <option value="16+" {{ $film->kategori_umur == '16+' ? 'selected' : '' }}>16+</option>
+                        <option value="17+" {{ $film->kategori_umur == '17+' ? 'selected' : '' }}>17+</option>
+                        <option value="18+" {{ $film->kategori_umur == '18+' ? 'selected' : '' }}>18+</option>
+                        <option value="21+" {{ $film->kategori_umur == '21+' ? 'selected' : '' }}>21+</option>
+                    </select>
                 </div>
                 <div class="mb-5">
-                    <label for="total_episode" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Total Episode</label>
-                    <input type="number" name="total_episode" id="total_episode" value="{{ $film->total_episode }}" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Total Episode" required />
+                    <label for="kategori_film" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Kategori Film</label>
+                    <select name="kategori_film" id="kategori_film" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="" @php echo $id ? '' : 'selected'; @endphp disabled>Pilih Kategori</option>
+                        <option value="movies" {{ $film->kategori_film == 'movies' ? 'selected' : '' }}>Movies</option>
+                        <option value="series" {{ $film->kategori_film == 'series' ? 'selected' : '' }}>Series</option>
+                        <option value="anime" {{ $film->kategori_film == 'anime' ? 'selected' : '' }}>Anime</option>
+                    </select>
                 </div>
             </div>
 

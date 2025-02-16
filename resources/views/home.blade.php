@@ -96,19 +96,19 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
                     @foreach ($series as $serie)
                     <div class="relative max-w-sm overflow-hidden group">
-                        <a href="{{ route('film.detail', $series->slug) }}" class="block">
+                        <a href="{{ route('film.detail', $serie->slug) }}" class="block">
                             <div class="w-full relative">
                                 <!-- Poster -->
                                 <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                    src="{{ $series->poster_url }}"
-                                    alt="{{ $series->judul }}" />
+                                    src="{{ $serie->poster_url }}"
+                                    alt="{{ $serie->judul }}" />
                             </div>
                             <div class="dark:text-white bg-transparent p-1">
                                 <!-- Judul -->
-                                <h5 class="text-sm font-bold drop-shadow">{{ $series->judul }}</h5>
+                                <h5 class="text-sm font-bold drop-shadow">{{ $serie->judul }}</h5>
                                 <!-- Tahun Rilis -->
                                 <p class="text-xs dark:text-gray-300">
-                                    {{ $series->tahun_rilis }}
+                                    {{ $serie->tahun_rilis }}
                                 </p>
                             </div>
                         </a>

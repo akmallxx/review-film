@@ -43,7 +43,9 @@
                             <i class="bi bi-play-circle"></i> Watch Trailer
                         </button>
                         <span class="me-6 ms-4 text-neutral-500 text-2xl">|</span> <!-- Separator -->
-                        <span class="dark:text-neutral-400 text-md">{{ $film->durasi_format }}</span>
+                        <span class="dark:text-neutral-400 text-md">
+                            {{ $film->kategori_film !== 'movies' ? "Total Episode: " . $film->total_episode : $film->durasi_format }}
+                        </span>
                         <div class="flex flex-wrap items-center mt-6">
                             <p class="flex text-lg md:text-xl drop-shadow-md">
                                 @for ($i = 1; $i <= 5; $i++)

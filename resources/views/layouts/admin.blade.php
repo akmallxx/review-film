@@ -36,8 +36,8 @@
 <body class="bg-neutral-200 dark:bg-neutral-900">
     @include('.layouts.admin.navbar')
     <div class="flex h-screen">
-        @include('layouts.admin.sidebar')
-        <div class="flex-1 flex flex-col">
+    @include('layouts.admin.sidebar')
+        <div class="flex-1 flex flex-col overflow-auto">
             <main class="p-6">
                 <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md">
                     @yield('content')
@@ -57,6 +57,50 @@
     <!-- Link JS DataTables dan jQuery -->
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: "{!! session('success') !!}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "searching": true,
+                "dom": '<"top"f>rt<"bottom"ip><"clear">', // Search bar di sebelah kiri
+                "pagingType": "simple", // Tipe pagination yang lebih sederhana
+                "lengthMenu": [5, 10, 25, 50], // Opsi jumlah data per halaman
+                "pageLength": 5, // Jumlah data default per halaman
+                "responsive": true // Responsivitas tabel
+            });
+        });
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Yakin ingin menghapus data?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ asset('film/delete/') }}" + id;
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
