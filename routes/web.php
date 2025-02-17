@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 });
 
 Route::group(['middleware' => ['can:crud admin']], function () {

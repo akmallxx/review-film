@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.1deb3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 15, 2025 at 01:11 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Feb 16, 2025 at 05:13 PM
+-- Server version: 8.0.39-0ubuntu0.24.04.2
+-- PHP Version: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `banners` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,9 +40,9 @@ CREATE TABLE `banners` (
 --
 
 CREATE TABLE `cache` (
-  `key` varchar(255) NOT NULL,
-  `value` mediumtext NOT NULL,
-  `expiration` int(11) NOT NULL
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:3:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";}s:11:\"permissions\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"crud admin\";s:1:\"c\";s:3:\"web\";}}s:5:\"roles\";a:0:{}}', 1739647625);
+('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:3:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";}s:11:\"permissions\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"crud admin\";s:1:\"c\";s:3:\"web\";}}s:5:\"roles\";a:0:{}}', 1739809452);
 
 -- --------------------------------------------------------
 
@@ -59,9 +59,9 @@ INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 --
 
 CREATE TABLE `cache_locks` (
-  `key` varchar(255) NOT NULL,
-  `owner` varchar(255) NOT NULL,
-  `expiration` int(11) NOT NULL
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -71,10 +71,10 @@ CREATE TABLE `cache_locks` (
 --
 
 CREATE TABLE `castings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nama_panggung` varchar(255) NOT NULL,
-  `nama_asli` varchar(255) NOT NULL,
-  `id_film` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `nama_panggung` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_asli` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_film` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -96,11 +96,11 @@ INSERT INTO `castings` (`id`, `nama_panggung`, `nama_asli`, `id_film`, `created_
 --
 
 CREATE TABLE `comments` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `comment` text NOT NULL,
-  `rating` enum('1','2','3','4','5') NOT NULL,
-  `id_user` int(10) UNSIGNED NOT NULL,
-  `id_film` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` enum('1','2','3','4','5') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_user` int UNSIGNED NOT NULL,
+  `id_film` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -122,13 +122,13 @@ INSERT INTO `comments` (`id`, `comment`, `rating`, `id_user`, `id_film`, `create
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `id` bigint UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -138,19 +138,19 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `films` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `judul` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `poster` varchar(255) NOT NULL,
-  `deskripsi` text NOT NULL,
-  `kategori_film` text NOT NULL,
-  `tahun_rilis` year(4) NOT NULL,
-  `durasi` int(11) NOT NULL,
-  `pencipta` varchar(255) NOT NULL,
-  `trailer` text NOT NULL,
-  `kategori_umur` varchar(255) NOT NULL,
-  `total_episode` int(11) NOT NULL,
-  `id_users` int(10) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `judul` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `poster` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deskripsi` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kategori_film` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_rilis` year NOT NULL,
+  `durasi` int NOT NULL,
+  `pencipta` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `trailer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kategori_umur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_episode` int NOT NULL,
+  `id_users` int UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -160,20 +160,21 @@ CREATE TABLE `films` (
 --
 
 INSERT INTO `films` (`id`, `judul`, `slug`, `poster`, `deskripsi`, `kategori_film`, `tahun_rilis`, `durasi`, `pencipta`, `trailer`, `kategori_umur`, `total_episode`, `id_users`, `created_at`, `updated_at`) VALUES
-(1, 'CAPTAIN AMERICA: BRAVE NEW WORLD', 'captain-america-brave-new-world-2024', 'https://asset.tix.id/wp-content/uploads/2025/02/25CABW.jpg', 'Setelah bertemu dengan Presiden AS yang baru terpilih, Thaddeus Ross (Harrison Ford), Sam Wilson (Anthony Mackie), Captain America yang baru, menemukan dirinya berada di tengah-tengah konflik internasional dan harus mengungkap motif di balik rencana global yang jahat.', 'movies', '2024', 118, 'Marvel Studios', 'https://web3.21cineplex.com/movie-trailer/25CABW.mp4', 'PG-13', 1, 3, '2025-02-12 14:23:07', '2025-02-15 04:03:59'),
-(2, 'CINTA TAK PERNAH TEPAT WAKTU', 'cinta-tak-pernah-tepat-waktu-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/ccefe9b5-e096-478d-939a-f8b3a5022c8b-600x885.webp', 'Keinginan Bapak dan Ibu melihat Daku (Refal Hady) menikah tidak sejalan dengan kisah cinta putra mereka yang selalu berantakan. Saat Daku merasa menemukan orang yang tepat, waktu seolah enggan bersahabat. Dari Nadya (Nadya Arina) yang sangat sabar, Anya (Carissa Perusset) yang menghadirkan banyak keseruan, dan Sarah (Mira Filzah) yang menenangkan, adakah yang berhasil bersama Daku hingga akhir? Apakah cinta Daku bisa tepat waktu?', 'movies', '2025', 110, 'Puthut EA', 'https://web3.21cineplex.com/movie-trailer/15CTPT.mp4', 'PG-13', 1, 3, '2025-02-13 00:45:55', '2025-02-13 00:45:55'),
-(3, 'PINTU PINTU SURGA', 'pintu-pintu-surga-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/b13e7086-b5f3-427b-9276-fd54e18424bc-600x885.webp', 'Memiliki keluarga yang harmonis dan hidup bahagia bersama keluarga kecilnya, Latifah (Susan Sameh) merasa diuji saat suaminya meninggal dan dia harus merawat anaknya (Athar Barakbah) yang ADHD dan yayasan pendidikan milik suaminya.\r\n\r\nArman (Arya Saloka), mantan kekasih Latifah, membantu mengurus yayasan suaminya. Situasi ini membuat mereka kembali dekat, hingga akhirnya Arman memutuskan untuk meminang Latifah. Namun, Latifah dihadapkan pada pilihan apakah dia mampu mengikhlaskan hatinya untuk menjadi istri kedua.', 'movies', '2025', 104, 'Dakaramira Studio', 'https://web3.21cineplex.com/movie-trailer/15PPSA.mp4', 'PG-13', 1, 3, '2025-02-13 00:45:55', '2025-02-13 00:45:55'),
-(4, '(500) DAYS OF SUMMER', '500-days-of-summer-2009', 'https://upload.wikimedia.org/wikipedia/id/thumb/d/d1/Five_hundred_days_of_summer.jpg/220px-Five_hundred_days_of_summer.jpg', '500 Days of Summer ((500) Days of Summer) (2009) Setelah kali ini sepertinya Summer telah meninggalkan hidupnya untuk selamanya, Tom Hansen mengenang kembali lebih dari satu tahun saat ia mengenal Summer Finn. Bagi Tom, itu adalah cinta pada pandangan pertama saat ia masuk ke perusahaan kartu ucapan tempat ia bekerja, ia adalah asisten administrasi yang baru. Meskipun Summer tidak percaya pada hubungan atau pacar - menurutnya, kehidupan nyata pada akhirnya akan selalu menghalangi - Tom dan Summer menjadi lebih dari sekadar teman. Melalui cobaan dan kesengsaraan hubungan Tom dan Summer, Tom selalu dapat mengandalkan nasihat dari kedua sahabatnya, McKenzie dan Paul. Namun, adik perempuan Tom yang masih remaja, Rachel, adalah suaranya yang masuk akal. Setelah semua dikatakan dan dilakukan, Tom adalah orang yang pada akhirnya harus membuat pilihan untuk mendengarkan atau tidak.', 'movies', '2009', 95, 'Dune Entertainment', 'https://youtu.be/PsD0NpFSADM?si=8_hZUyExDgYVjEZO', 'PG-13', 1, 3, '2025-02-13 00:58:45', '2025-02-13 00:58:45'),
-(5, 'ATTACK ON TITAN: THE LAST ATTACK', 'attack-on-titan-the-last-attack-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/2137265e-0b97-4f08-87dc-19e050200a4b-600x885.webp', 'Ini adalah \"Serangan\" terakhir!\r\nAttack on Titan berkisah tentang pertempuran tanpa akhir antara manusia dan Titan di dunia yang dipisahkan oleh tembok. Seperti komiknya, musim pertama anime TV ini menjadi hit di seluruh dunia, menceritakan kisah yang berlangsung selama 10 tahun dan mencapai akhir pada Musim Gugur 2023. Bagian 1 dan 2 dari Final Season telah direkonstruksi sebagai rilis teatrikal pada Musim Gugur 2024. Di bawah arahan sutradara Yuuichiro Hayashi, potongan asli telah disempurnakan, sekarang dengan suara 5.1ch dan durasi tayang 145 menit. Dengan meningkatkan kualitas lebih tinggi dari siaran TV \"kualitas film\" aslinya, ia telah berevolusi menjadi gambar bergerak yang megah dan sesuai standard layar lebar. Ini adalah puncak dari \"Attack on Titan,\" sebuah karya yang telah dicurahkan oleh seluruh staf dan pemeran dengan sepenuh hati dan jiwa mereka. \"The Ultimate conclusion Arc\" yang tidak ingin kamu lewatkan sedetik pun!', 'anime', '2025', 144, 'Hajime Isayama', 'https://youtu.be/exSPi2EC7Rs', 'PG-18', 1, 2, '2025-02-14 15:13:52', '2025-02-14 15:13:52'),
-(6, 'PERAYAAN MATI RASA', 'perayaan-mati-rasa-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/893f8bce-0d65-499c-a892-d0698cd3a651.webp', 'Sebagai seorang anak pertama, IAN (Iqbaal Ramadhan) berjuang meraih mimpinya bersama para sahabatnya dan berusaha keras memenuhi semua ekspektasi yang ia bangun hingga membuatnya jauh dari keluarga. Namun, ketika sebuah peristiwa besar membuat Ian kehilangan orang tuanya secara tiba-tiba, Ian berusaha selalu kuat dan mengubur semua perasaannya hingga ia mati rasa.', 'movies', '2025', 125, 'Umay Shahab', 'https://youtu.be/i8XHPvkg9nQ', 'PG-13', 1, 2, '2025-02-15 04:10:07', '2025-02-15 04:10:07'),
-(7, '1 KAKAK 7 PONAKAN', '1-kakak-7-ponakan-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/52fa8458-8ba0-44c3-8e4a-6aa27e6840e7-600x885.webp', 'Setelah kematian mendadak kakak-kakaknya, Hendarmoko (Chicco Kurniawan) seorang arsitek muda yang sedang berjuang, tiba-tiba menjadi orangtua tunggal bagi keponakan-keponakannya. Ketika kesempatan untuk kehidupan yang lebih baik muncul, dia harus memilih antara kehidupan cintanya, karier atau keponakan-keponakannya.', 'movies', '2025', 131, 'Yandy Laurens', 'https://web3.21cineplex.com/movie-trailer/151K7P.mp4', 'PG-13', 1, 2, '2025-02-15 04:11:29', '2025-02-15 04:11:29'),
-(8, 'NOSFERATU', 'nosferatu-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/977cc9a9-31ce-45a4-a6c6-479d2cb6a32b-600x885.webp', 'Obsesi antara Ellen Hutter (Lily-Rose Depp) dan Count Orlok (Bill Skarsgard), vampir mengerikan yang tergila-gila padanya. Kisahnya membuat teror dan kengerian yang tak terkira akibatnya.', 'movies', '2025', 130, 'Robbert Eggers', 'https://web3.21cineplex.com/movie-trailer/25NOSU.mp4', 'PG-13', 1, 2, '2025-02-15 04:13:10', '2025-02-15 04:13:10'),
-(9, 'BRIDGET JONES: MAD ABOUT THE BOY', 'bridget-jones-mad-about-the-boy-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/eafc21b377b2402a86de0452f9ece52f-600x885.jpg', 'Bridget Jones menjalani kehidupan sebagai janda dan ibu tunggal dengan bantuan keluarganya, teman-temannya, dan mantan kekasihnya, Daniel. Kembali bekerja dan di sebuah aplikasi, dia dikejar oleh seorang pria yang lebih muda dan mungkin - hanya mungkin - guru sains anaknya.', 'movies', '2025', 124, 'Helen Fielding', 'https://youtu.be/lpDFKbPYmQ8', 'PG-13', 1, 2, '2025-02-15 04:15:18', '2025-02-15 04:15:18'),
-(10, 'SECRET: UNTOLD MELODY', 'secret-untold-melody-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/67b5af3c-6a48-4e89-aba2-e808ae66fd44-600x885.webp', '“Ada berbagai emosi yang hanya kurasakan saat bermain piano. Aku merasakan itu juga saat bertemu denganmu.”\r\nYu-jun, seorang pianis yang belajar di luar negeri, datang ke Korea sebagai siswa pertukaran untuk menerima perawatan pada pergelangan tangannya. Di hari pertamanya sekolah, Yu-jun bertemu Jung-a di ruang latihan, tertarik oleh melodi piano yang misterius. Keduanya, yang dipertemukan takdir, menghabiskan waktu bersama dan menjadi lebih dekat. Namun, pertemuannya dengan Jung-a, yang bahkan tidak memberinya informasi kontaknya, terus berjalan serba salah, dan pengakuan tiba-tiba In-hee, yang mengira mata Yu-jun selalu tertuju padanya, sangat menyakiti Jung-a. Setelah hari itu, Yu-jun mencari keberadaan Jung-a, dan menemukan rahasianya…\r\n“Bagian yang menghubungkan waktu kita, ‘Rahasia’, dan begitulah cinta dimulai.”', 'movies', '2025', 103, 'Jay Chou', 'https://youtu.be/GAfRxWfguBI', 'PG-13', 1, 2, '2025-02-15 04:19:40', '2025-02-15 04:19:40'),
-(11, 'PADDINGTON IN PERU', 'paddington-in-peru-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/0dc9e7fdd3234f5bade9ef8c18e59ab2-600x885.jpg', 'Paddington kembali ke Peru untuk mengunjungi Bibi Lucy tercintanya, yang sekarang tinggal di Panti Jompo Beruang. Dengan keluarga Brown di sampingnya, petualangan mendebarkan terjadi ketika sebuah misteri membawa mereka ke dalam perjalanan yang tak terduga.', 'movies', '2025', 106, 'Dougal Wilson', 'https://youtu.be/NTvudSGfHRI', 'PG-13', 1, 2, '2025-02-15 04:21:39', '2025-02-15 04:21:39'),
-(12, 'FIREFIGHTERS', 'firefighters-2024', 'https://asset.tix.id/wp-content/uploads/2025/02/4db20079-820f-49fc-8970-02fbd6c904e3-600x885.webp', 'Demi menyelamatkan nyawa dan bertahan hidup, tim pemadam kebakaran menghadapi tugas setiap hari seperti itu adalah misi terakhir mereka. Meskipun kondisinya sulit, mereka bersatu dengan satu tujuan: memadamkan api dan menyelamatkan semua orang. Suatu hari, panggilan darurat mendesak masuk—ada kebakaran di Hongje-dong. Tim segera menyaksikan betapa gentingnya situasi di sana…', 'movies', '2024', 106, 'Kwak Kyung-taek', 'https://youtu.be/DcNfAAwpyfM', 'PG-13', 1, 2, '2025-02-15 04:23:42', '2025-02-15 04:23:42'),
-(13, 'KEAJAIBAN AIR MATA WANITA', 'keajaiban-air-mata-wanita-2024', 'https://asset.tix.id/wp-content/uploads/2025/01/157ff3d1-caec-49d9-8766-13edc9e62ec5-600x885.webp', 'Film berdasarkan kisah nyata dari buku Best Seller “Rahasia Magnet Rezeki” ini, mengisahkan perjalanan hidup Kiki, seorang wanita sukses yang berusaha bangkit menghadapi keterpurukan setelah kematian tiba-tiba suaminya, Ronald. Terjebak dalam ketidakpastian dan keputusasaan, kehidupan Kiki yang dulu mapan dan indah berubah menjadi serangkaian cobaan. Kiki mengalami kesulitan keuangan, kehilangan pekerjaan setelah berhijab, dan konflik keluarga yang mengancam kehilangan anak satu-satunya, Bunga. Pertemuan Kiki dengan sahabatnya, Rahma yang memperkenalkan ilmu Magnet Rezeki membawa perubahan besar dalam hidupnya. Dengan kesadaran mendalam bahwa setiap pikiran adalah doa, Kiki berjuang mengamalkan ilmu Magnet Rezeki yang membuat hidupnya berubah penuh keajaiban. Kiki akhirnya berhasil menyelesaikan semua masalahnya. Puncaknya ia mendapatkan suami baru, Bagas, yang membuat hidupnya lebih baik dan bahagia. Dengan sentuhan drama mendalam dan humor segar, film ini menggambarkan kekuatan kesabaran, keikhlasan, dan kemampuan memaknai musibah sebagai rezeki yang disikapi dengan rasa syukur untuk mendatangkan keajaiban. Dengan cerita penuh inspirasi, film ini juga menyajikan pesan bahwa keajaiban itu ada bagi mereka yang percaya. Dan ketenangan akan melahirkan keajaiban', 'movies', '2024', 110, 'Indra Gunawan', 'https://youtu.be/pLLUYgQEfPo', 'PG-13', 1, 2, '2025-02-15 04:24:55', '2025-02-15 04:24:55'),
-(14, 'YOU ARE THE APPLE OF MY EYE', 'you-are-the-apple-of-my-eye-2024', 'https://asset.tix.id/wp-content/uploads/2025/02/25YAAM.jpg', 'Sekelompok teman dekat di sebuah sekolah swasta semuanya tergila-gila pada murid cantik, Sun-ah (Kim Da-hyun). Satu-satunya anggota kelompok yang mengaku tidak suka adalah Jin-woo (Jung Jin-young), tetapi akhirnya ia juga mencintainya.', 'movies', '2024', 102, 'Giddens Ko', 'https://web3.21cineplex.com/movie-trailer/25YAAM.mp4', 'PG-13', 1, 2, '2025-02-15 04:26:57', '2025-02-15 04:26:57');
+(1, 'CAPTAIN AMERICA: BRAVE NEW WORLD', 'captain-america-brave-new-world-2024', 'https://asset.tix.id/wp-content/uploads/2025/02/25CABW.jpg', 'Setelah bertemu dengan Presiden AS yang baru terpilih, Thaddeus Ross (Harrison Ford), Sam Wilson (Anthony Mackie), Captain America yang baru, menemukan dirinya berada di tengah-tengah konflik internasional dan harus mengungkap motif di balik rencana global yang jahat.', 'movies', '2024', 118, 'Marvel Studios', 'https://web3.21cineplex.com/movie-trailer/25CABW.mp4', '13+', 1, 3, '2025-02-12 14:23:07', '2025-02-15 04:03:59'),
+(2, 'CINTA TAK PERNAH TEPAT WAKTU', 'cinta-tak-pernah-tepat-waktu-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/ccefe9b5-e096-478d-939a-f8b3a5022c8b-600x885.webp', 'Keinginan Bapak dan Ibu melihat Daku (Refal Hady) menikah tidak sejalan dengan kisah cinta putra mereka yang selalu berantakan. Saat Daku merasa menemukan orang yang tepat, waktu seolah enggan bersahabat. Dari Nadya (Nadya Arina) yang sangat sabar, Anya (Carissa Perusset) yang menghadirkan banyak keseruan, dan Sarah (Mira Filzah) yang menenangkan, adakah yang berhasil bersama Daku hingga akhir? Apakah cinta Daku bisa tepat waktu?', 'movies', '2025', 110, 'Puthut EA', 'https://web3.21cineplex.com/movie-trailer/15CTPT.mp4', '13+', 1, 3, '2025-02-13 00:45:55', '2025-02-13 00:45:55'),
+(3, 'PINTU PINTU SURGA', 'pintu-pintu-surga-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/b13e7086-b5f3-427b-9276-fd54e18424bc-600x885.webp', 'Memiliki keluarga yang harmonis dan hidup bahagia bersama keluarga kecilnya, Latifah (Susan Sameh) merasa diuji saat suaminya meninggal dan dia harus merawat anaknya (Athar Barakbah) yang ADHD dan yayasan pendidikan milik suaminya.\r\n\r\nArman (Arya Saloka), mantan kekasih Latifah, membantu mengurus yayasan suaminya. Situasi ini membuat mereka kembali dekat, hingga akhirnya Arman memutuskan untuk meminang Latifah. Namun, Latifah dihadapkan pada pilihan apakah dia mampu mengikhlaskan hatinya untuk menjadi istri kedua.', 'movies', '2025', 104, 'Dakaramira Studio', 'https://web3.21cineplex.com/movie-trailer/15PPSA.mp4', '13+', 1, 3, '2025-02-13 00:45:55', '2025-02-13 00:45:55'),
+(4, '(500) DAYS OF SUMMER', '500-days-of-summer-2009', 'https://upload.wikimedia.org/wikipedia/id/thumb/d/d1/Five_hundred_days_of_summer.jpg/220px-Five_hundred_days_of_summer.jpg', '500 Days of Summer ((500) Days of Summer) (2009) Setelah kali ini sepertinya Summer telah meninggalkan hidupnya untuk selamanya, Tom Hansen mengenang kembali lebih dari satu tahun saat ia mengenal Summer Finn. Bagi Tom, itu adalah cinta pada pandangan pertama saat ia masuk ke perusahaan kartu ucapan tempat ia bekerja, ia adalah asisten administrasi yang baru. Meskipun Summer tidak percaya pada hubungan atau pacar - menurutnya, kehidupan nyata pada akhirnya akan selalu menghalangi - Tom dan Summer menjadi lebih dari sekadar teman. Melalui cobaan dan kesengsaraan hubungan Tom dan Summer, Tom selalu dapat mengandalkan nasihat dari kedua sahabatnya, McKenzie dan Paul. Namun, adik perempuan Tom yang masih remaja, Rachel, adalah suaranya yang masuk akal. Setelah semua dikatakan dan dilakukan, Tom adalah orang yang pada akhirnya harus membuat pilihan untuk mendengarkan atau tidak.', 'movies', '2009', 95, 'Dune Entertainment', 'https://youtu.be/PsD0NpFSADM?si=8_hZUyExDgYVjEZO', '13+', 1, 3, '2025-02-13 00:58:45', '2025-02-13 00:58:45'),
+(5, 'ATTACK ON TITAN: THE LAST ATTACK', 'attack-on-titan-the-last-attack-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/2137265e-0b97-4f08-87dc-19e050200a4b-600x885.webp', 'Ini adalah \"Serangan\" terakhir!\r\nAttack on Titan berkisah tentang pertempuran tanpa akhir antara manusia dan Titan di dunia yang dipisahkan oleh tembok. Seperti komiknya, musim pertama anime TV ini menjadi hit di seluruh dunia, menceritakan kisah yang berlangsung selama 10 tahun dan mencapai akhir pada Musim Gugur 2023. Bagian 1 dan 2 dari Final Season telah direkonstruksi sebagai rilis teatrikal pada Musim Gugur 2024. Di bawah arahan sutradara Yuuichiro Hayashi, potongan asli telah disempurnakan, sekarang dengan suara 5.1ch dan durasi tayang 145 menit. Dengan meningkatkan kualitas lebih tinggi dari siaran TV \"kualitas film\" aslinya, ia telah berevolusi menjadi gambar bergerak yang megah dan sesuai standard layar lebar. Ini adalah puncak dari \"Attack on Titan,\" sebuah karya yang telah dicurahkan oleh seluruh staf dan pemeran dengan sepenuh hati dan jiwa mereka. \"The Ultimate conclusion Arc\" yang tidak ingin kamu lewatkan sedetik pun!', 'anime', '2025', 144, 'Hajime Isayama', 'https://youtu.be/exSPi2EC7Rs', '18+', 1, 2, '2025-02-14 15:13:52', '2025-02-14 15:13:52'),
+(6, 'PERAYAAN MATI RASA', 'perayaan-mati-rasa-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/893f8bce-0d65-499c-a892-d0698cd3a651.webp', 'Sebagai seorang anak pertama, IAN (Iqbaal Ramadhan) berjuang meraih mimpinya bersama para sahabatnya dan berusaha keras memenuhi semua ekspektasi yang ia bangun hingga membuatnya jauh dari keluarga. Namun, ketika sebuah peristiwa besar membuat Ian kehilangan orang tuanya secara tiba-tiba, Ian berusaha selalu kuat dan mengubur semua perasaannya hingga ia mati rasa.', 'movies', '2025', 125, 'Umay Shahab', 'https://youtu.be/i8XHPvkg9nQ', '13+', 1, 2, '2025-02-15 04:10:07', '2025-02-15 04:10:07'),
+(7, '1 KAKAK 7 PONAKAN', '1-kakak-7-ponakan-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/52fa8458-8ba0-44c3-8e4a-6aa27e6840e7-600x885.webp', 'Setelah kematian mendadak kakak-kakaknya, Hendarmoko (Chicco Kurniawan) seorang arsitek muda yang sedang berjuang, tiba-tiba menjadi orangtua tunggal bagi keponakan-keponakannya. Ketika kesempatan untuk kehidupan yang lebih baik muncul, dia harus memilih antara kehidupan cintanya, karier atau keponakan-keponakannya.', 'movies', '2025', 131, 'Yandy Laurens', 'https://web3.21cineplex.com/movie-trailer/151K7P.mp4', '13+', 1, 2, '2025-02-15 04:11:29', '2025-02-15 04:11:29'),
+(8, 'NOSFERATU', 'nosferatu-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/977cc9a9-31ce-45a4-a6c6-479d2cb6a32b-600x885.webp', 'Obsesi antara Ellen Hutter (Lily-Rose Depp) dan Count Orlok (Bill Skarsgard), vampir mengerikan yang tergila-gila padanya. Kisahnya membuat teror dan kengerian yang tak terkira akibatnya.', 'movies', '2025', 130, 'Robbert Eggers', 'https://web3.21cineplex.com/movie-trailer/25NOSU.mp4', '13+', 1, 2, '2025-02-15 04:13:10', '2025-02-15 04:13:10'),
+(9, 'BRIDGET JONES: MAD ABOUT THE BOY', 'bridget-jones-mad-about-the-boy-2025', 'https://asset.tix.id/wp-content/uploads/2025/02/eafc21b377b2402a86de0452f9ece52f-600x885.jpg', 'Bridget Jones menjalani kehidupan sebagai janda dan ibu tunggal dengan bantuan keluarganya, teman-temannya, dan mantan kekasihnya, Daniel. Kembali bekerja dan di sebuah aplikasi, dia dikejar oleh seorang pria yang lebih muda dan mungkin - hanya mungkin - guru sains anaknya.', 'movies', '2025', 124, 'Helen Fielding', 'https://youtu.be/lpDFKbPYmQ8', '13+', 1, 2, '2025-02-15 04:15:18', '2025-02-15 04:15:18'),
+(10, 'SECRET: UNTOLD MELODY', 'secret-untold-melody-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/67b5af3c-6a48-4e89-aba2-e808ae66fd44-600x885.webp', '“Ada berbagai emosi yang hanya kurasakan saat bermain piano. Aku merasakan itu juga saat bertemu denganmu.”\r\nYu-jun, seorang pianis yang belajar di luar negeri, datang ke Korea sebagai siswa pertukaran untuk menerima perawatan pada pergelangan tangannya. Di hari pertamanya sekolah, Yu-jun bertemu Jung-a di ruang latihan, tertarik oleh melodi piano yang misterius. Keduanya, yang dipertemukan takdir, menghabiskan waktu bersama dan menjadi lebih dekat. Namun, pertemuannya dengan Jung-a, yang bahkan tidak memberinya informasi kontaknya, terus berjalan serba salah, dan pengakuan tiba-tiba In-hee, yang mengira mata Yu-jun selalu tertuju padanya, sangat menyakiti Jung-a. Setelah hari itu, Yu-jun mencari keberadaan Jung-a, dan menemukan rahasianya…\r\n“Bagian yang menghubungkan waktu kita, ‘Rahasia’, dan begitulah cinta dimulai.”', 'movies', '2025', 103, 'Jay Chou', 'https://youtu.be/GAfRxWfguBI', '16+', 1, 2, '2025-02-15 04:19:40', '2025-02-16 09:53:15'),
+(11, 'PADDINGTON IN PERU', 'paddington-in-peru-2025', 'https://asset.tix.id/wp-content/uploads/2025/01/0dc9e7fdd3234f5bade9ef8c18e59ab2-600x885.jpg', 'Paddington kembali ke Peru untuk mengunjungi Bibi Lucy tercintanya, yang sekarang tinggal di Panti Jompo Beruang. Dengan keluarga Brown di sampingnya, petualangan mendebarkan terjadi ketika sebuah misteri membawa mereka ke dalam perjalanan yang tak terduga.', 'movies', '2025', 106, 'Dougal Wilson', 'https://youtu.be/NTvudSGfHRI', '13+', 1, 2, '2025-02-15 04:21:39', '2025-02-15 04:21:39'),
+(12, 'FIREFIGHTERS', 'firefighters-2024', 'https://asset.tix.id/wp-content/uploads/2025/02/4db20079-820f-49fc-8970-02fbd6c904e3-600x885.webp', 'Demi menyelamatkan nyawa dan bertahan hidup, tim pemadam kebakaran menghadapi tugas setiap hari seperti itu adalah misi terakhir mereka. Meskipun kondisinya sulit, mereka bersatu dengan satu tujuan: memadamkan api dan menyelamatkan semua orang. Suatu hari, panggilan darurat mendesak masuk—ada kebakaran di Hongje-dong. Tim segera menyaksikan betapa gentingnya situasi di sana…', 'movies', '2024', 106, 'Kwak Kyung-taek', 'https://youtu.be/DcNfAAwpyfM', '13+', 1, 2, '2025-02-15 04:23:42', '2025-02-15 04:23:42'),
+(13, 'KEAJAIBAN AIR MATA WANITA', 'keajaiban-air-mata-wanita-2024', 'https://asset.tix.id/wp-content/uploads/2025/01/157ff3d1-caec-49d9-8766-13edc9e62ec5-600x885.webp', 'Film berdasarkan kisah nyata dari buku Best Seller “Rahasia Magnet Rezeki” ini, mengisahkan perjalanan hidup Kiki, seorang wanita sukses yang berusaha bangkit menghadapi keterpurukan setelah kematian tiba-tiba suaminya, Ronald. Terjebak dalam ketidakpastian dan keputusasaan, kehidupan Kiki yang dulu mapan dan indah berubah menjadi serangkaian cobaan. Kiki mengalami kesulitan keuangan, kehilangan pekerjaan setelah berhijab, dan konflik keluarga yang mengancam kehilangan anak satu-satunya, Bunga. Pertemuan Kiki dengan sahabatnya, Rahma yang memperkenalkan ilmu Magnet Rezeki membawa perubahan besar dalam hidupnya. Dengan kesadaran mendalam bahwa setiap pikiran adalah doa, Kiki berjuang mengamalkan ilmu Magnet Rezeki yang membuat hidupnya berubah penuh keajaiban. Kiki akhirnya berhasil menyelesaikan semua masalahnya. Puncaknya ia mendapatkan suami baru, Bagas, yang membuat hidupnya lebih baik dan bahagia. Dengan sentuhan drama mendalam dan humor segar, film ini menggambarkan kekuatan kesabaran, keikhlasan, dan kemampuan memaknai musibah sebagai rezeki yang disikapi dengan rasa syukur untuk mendatangkan keajaiban. Dengan cerita penuh inspirasi, film ini juga menyajikan pesan bahwa keajaiban itu ada bagi mereka yang percaya. Dan ketenangan akan melahirkan keajaiban', 'movies', '2024', 110, 'Indra Gunawan', 'https://youtu.be/pLLUYgQEfPo', '13+', 1, 2, '2025-02-15 04:24:55', '2025-02-15 04:24:55'),
+(14, 'YOU ARE THE APPLE OF MY EYE', 'you-are-the-apple-of-my-eye-2024', 'https://asset.tix.id/wp-content/uploads/2025/02/25YAAM.jpg', 'Sekelompok teman dekat di sebuah sekolah swasta semuanya tergila-gila pada murid cantik, Sun-ah (Kim Da-hyun). Satu-satunya anggota kelompok yang mengaku tidak suka adalah Jin-woo (Jung Jin-young), tetapi akhirnya ia juga mencintainya.', 'movies', '2024', 102, 'Giddens Ko', 'https://web3.21cineplex.com/movie-trailer/25YAAM.mp4', '13+', 1, 2, '2025-02-15 04:26:57', '2025-02-15 04:26:57'),
+(15, 'TWINKLING WATERMELON', 'twinkling-watermelon-2023', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Twinkling_Watermelon.jpg/250px-Twinkling_Watermelon.jpg', 'Pada tahun 2023, Ha Eun Gyeol (Ryeoun) adalah seorang siswa sekolah menengah dan musisi rock pemula. Dia menemukan sebuah toko musik ajaib yang mengirimnya kembali ke tahun 1995 ... di mana dia berhadapan muka dengan ayahnya Ha Lee Chan (Choi Hyun Wook), yang masih di sekolah menengah! Segalanya menjadi lebih aneh ketika dia menemukan bahwa Lee Chan naksir pemain cello es Se Kyeong (Seol In Ah) – bukan ibu Eun Gyeol, Cheong Ah (Shin Eun Soo)! Untuk mencoba dan memperbaikinya, Eun Gyeol harus bergabung dengan band yang digawangi oleh ayahnya. Bisakah Eun Gyeol menyatukan orang tua masa depannya? Dan apakah dia akan kembali ke kehidupan “modern ”? Serial drama Korea Selatan 2023 ini disutradarai oleh Son Jong Hyun.', 'series', '2023', 65, 'Studio Dragon', 'https://www.youtube.com/watch?v=KbWi3VW6QuM&pp=ygUcdHdpbmtsaW5nIHdhdGVybWVsb24gdHJhaWxlcg%3D%3D', '16+', 16, 2, '2025-02-16 09:41:53', '2025-02-16 09:54:33');
 
 -- --------------------------------------------------------
 
@@ -182,9 +183,9 @@ INSERT INTO `films` (`id`, `judul`, `slug`, `poster`, `deskripsi`, `kategori_fil
 --
 
 CREATE TABLE `genres` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -212,9 +213,9 @@ INSERT INTO `genres` (`id`, `title`, `slug`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `genre_relations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `id_film` bigint(20) UNSIGNED NOT NULL,
-  `id_genre` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `id_film` bigint UNSIGNED NOT NULL,
+  `id_genre` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -235,13 +236,13 @@ INSERT INTO `genre_relations` (`id`, `id_film`, `id_genre`, `created_at`, `updat
 --
 
 CREATE TABLE `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `queue` varchar(255) NOT NULL,
-  `payload` longtext NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL
+  `id` bigint UNSIGNED NOT NULL,
+  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint UNSIGNED NOT NULL,
+  `reserved_at` int UNSIGNED DEFAULT NULL,
+  `available_at` int UNSIGNED NOT NULL,
+  `created_at` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -251,16 +252,16 @@ CREATE TABLE `jobs` (
 --
 
 CREATE TABLE `job_batches` (
-  `id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `total_jobs` int(11) NOT NULL,
-  `pending_jobs` int(11) NOT NULL,
-  `failed_jobs` int(11) NOT NULL,
-  `failed_job_ids` longtext NOT NULL,
-  `options` mediumtext DEFAULT NULL,
-  `cancelled_at` int(11) DEFAULT NULL,
-  `created_at` int(11) NOT NULL,
-  `finished_at` int(11) DEFAULT NULL
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int NOT NULL,
+  `pending_jobs` int NOT NULL,
+  `failed_jobs` int NOT NULL,
+  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `cancelled_at` int DEFAULT NULL,
+  `created_at` int NOT NULL,
+  `finished_at` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -270,9 +271,9 @@ CREATE TABLE `job_batches` (
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
+  `id` int UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -298,10 +299,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `model_has_permissions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint UNSIGNED NOT NULL,
+  `permission_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -320,10 +321,10 @@ INSERT INTO `model_has_permissions` (`id`, `model_type`, `model_id`, `permission
 --
 
 CREATE TABLE `model_has_roles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint UNSIGNED NOT NULL,
+  `role_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -344,8 +345,8 @@ INSERT INTO `model_has_roles` (`id`, `model_type`, `model_id`, `role_id`, `creat
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -363,9 +364,9 @@ INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
 --
 
 CREATE TABLE `permissions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -384,9 +385,9 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 --
 
 CREATE TABLE `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -407,9 +408,9 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 --
 
 CREATE TABLE `role_has_permissions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` bigint(20) UNSIGNED NOT NULL,
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `role_id` bigint UNSIGNED NOT NULL,
+  `permission_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -421,12 +422,12 @@ CREATE TABLE `role_has_permissions` (
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) DEFAULT NULL,
-  `user_agent` text DEFAULT NULL,
-  `payload` longtext NOT NULL,
-  `last_activity` int(11) NOT NULL
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -434,7 +435,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('pFQlg6pOVFjybsTxWPQ4EQo855lKLAAkf4taZwHI', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVmhndTJDWXUzOHNkTm9VU2h5Qk9Pa3B0a3dtWlZsMHBobFl0YTZ0OCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1739620226);
+('9cs0XigBj4LV0rQS4k1Ci0JwGr2ZDKzJkMnA0kjf', 2, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidWlUQzdncnRrdnhld3h5NzF4ekVtejh3OGJ2SVhsQmNrUVpEWGt0MSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1739726013);
 
 -- --------------------------------------------------------
 
@@ -443,12 +444,12 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 
 CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -612,91 +613,91 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `castings`
 --
 ALTER TABLE `castings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `films`
 --
 ALTER TABLE `films`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `genre_relations`
 --
 ALTER TABLE `genre_relations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

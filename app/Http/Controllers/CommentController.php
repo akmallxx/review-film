@@ -38,4 +38,22 @@ class CommentController extends Controller
 
         return back()->with('success', 'Komentar dan rating berhasil dikirim!');
     }
+
+    public function update(Request $request, Comment $comment)
+    {
+        // Pastikan hanya pemilik komentar yang bisa mengupdate
+        $this->authorize('update', $comment);
+
+        $request->validate([
+            'comment' => 'required|string',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        $comment->update([
+            'comment' => $request->comment,
+            'rating' => $request->rating,
+        ]);
+
+        return back()->with('success', 'Komentar berhasil diperbarui.');
+    }
 }

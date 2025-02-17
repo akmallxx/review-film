@@ -53,6 +53,11 @@ class Film extends Model
         return $this->belongsToMany(Genre::class, 'genre_relations', 'id_film', 'id_genre');
     }
 
+    public function genre_relations()
+    {
+        return $this->hasMany(Genre_relation::class, 'id_film');
+    }
+
     // Relasi ke Comment
     public function comments()
     {
