@@ -25,10 +25,9 @@ class RoleSeeder extends Seeder
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
+            $adminRole->givePermissionTo($permission);
         }
 
-        $adminRole->givePermissionTo('crud admin');
-        $adminRole->givePermissionTo('crud author');
         $authorRole->givePermissionTo('crud author');
     }
 }

@@ -33,20 +33,24 @@ Route::middleware('auth')->group(function () {
     Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 });
 
-Route::group(['middleware' => ['can:crud admin']], function () {
+Route::group(['middleware' => ['can:crud author']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('admin');
-        Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-        Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
-        Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
-        Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
-        Route::put('/users/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
-        Route::group(['middleware' => ['can:crud author']], function () {
-            Route::get('/film', [FilmController::class, 'index'])->name('admin.film');
-            Route::get('/film/create', [FilmController::class, 'create'])->name('admin.film.create');
-            Route::post('/film/store', [FilmController::class, 'store'])->name('admin.film.store');
-            Route::get('/film/edit/{id}', [FilmController::class, 'edit'])->name('admin.film.edit');
-            Route::put('/film/update/{id}', [FilmController::class, 'update'])->name('admin.film.update');
+
+        Route::get('/film', [FilmController::class, 'index'])->name('admin.film');
+        Route::get('/film/create', [FilmController::class, 'create'])->name('admin.film.create');
+        Route::post('/film/store', [FilmController::class, 'store'])->name('admin.film.store');
+        Route::get('/film/edit/{id}', [FilmController::class, 'edit'])->name('admin.film.edit');
+        Route::put('/film/update/{id}', [FilmController::class, 'update'])->name('admin.film.update');
+        Route::delete('/film/delete/{id}', [FilmController::class, 'destroy'])->name('admin.film.delete');
+        
+        Route::group(['middleware' => ['can:crud admin']], function () {
+            Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+            Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
+            Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
+            Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('admin.users.edit');
+            Route::put('/users/update/{user}', [UserController::class, 'update'])->name('admin.users.update');
+            Route::delete('/users/delete/{user}', [UserController::class, 'destroy'])->name('admin.users.delete');
         });
     });
 });

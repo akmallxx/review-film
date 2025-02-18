@@ -1,4 +1,4 @@
-<nav class="top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
+<nav x-data="{ open: false }" class="top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +33,7 @@
                         </x-dropdown-link>
 
                         <!-- Check if user has 'admin' role -->
-                        @if(auth()->user()->hasRole('admin'))
+                        @if(auth()->user()->can('crud author'))
                         <x-dropdown-link :href="route('home')">
                             {{ __('Home') }}
                         </x-dropdown-link>

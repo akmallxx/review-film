@@ -48,7 +48,7 @@
                         </x-dropdown-link>
 
                         <!-- Check if user has 'admin' role -->
-                        @if(auth()->user()->hasRole('admin'))
+                        @if(auth()->user()->can('crud author'))
                         <x-dropdown-link :href="route('admin')">
                             {{ __('Admin Dashboard') }}
                         </x-dropdown-link>

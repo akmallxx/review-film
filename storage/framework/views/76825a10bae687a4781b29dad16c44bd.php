@@ -1,14 +1,12 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'CRUD User'); ?>
 
-@section('title', 'CRUD User')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="flex justify-between mb-8">
     <h2 class="text-3xl font-bold text-neutral-900 dark:text-white">Tabel Pengguna</h2>
 
     <!-- Create User Button -->
-    <a href="{{ route('admin.users.create') }}"
+    <a href="<?php echo e(route('admin.users.create')); ?>"
         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <i class="bi bi-plus-circle me-2"></i>Tambah Pengguna
     </a>
@@ -25,29 +23,29 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user)
+        <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <tr class="border-b dark:border-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-600 transition duration-300">
-            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $user->id }}</td>
-            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $user->name }}</td>
-            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $user->email }}</td>
-            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $user->getRoleNames()->implode(', ') }}</td>
+            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500"><?php echo e($user->id); ?></td>
+            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500"><?php echo e($user->name); ?></td>
+            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500"><?php echo e($user->email); ?></td>
+            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500"><?php echo e($user->getRoleNames()->implode(', ')); ?></td>
             <td class="p-4 text-xs text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">
-                <a href="{{ route('admin.users.edit', $user->id) }}"
+                <a href="<?php echo e(route('admin.users.edit', $user->id)); ?>"
                     class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Edit</a>
 
-                <form id="delete-form-{{ $user->id }}" action="{{ route('admin.users.delete', $user->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300" onclick="confirmDelete({{ $user->id }})">Delete</button>
+                <form id="delete-form-<?php echo e($user->id); ?>" action="<?php echo e(route('admin.users.delete', $user->id)); ?>" method="POST" style="display:inline;">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
+                    <button type="button" class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300" onclick="confirmDelete(<?php echo e($user->id); ?>)">Delete</button>
                 </form>
             </td>
         </tr>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
 </table>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <script>
         function confirmDelete(id) {
             Swal.fire({
@@ -66,4 +64,5 @@
             });
         }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\review-film\resources\views/admin/users/index.blade.php ENDPATH**/ ?>
