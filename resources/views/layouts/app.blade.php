@@ -28,6 +28,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @yield('css-content')
 </head>
 
 <body class="font-sans antialiased bg-neutral-200 dark:neutral-800">

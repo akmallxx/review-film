@@ -1,4 +1,4 @@
-<nav class="sticky top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg px-4 md:px-4 sm:px-4">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto">

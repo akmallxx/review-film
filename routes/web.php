@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FilmController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,18 +30,25 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 });
 
 Route::group(['middleware' => ['can:crud admin']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('admin');
-        Route::get('/film', [FilmController::class, 'index'])->name('admin.film');
-        Route::get('/film/create', [FilmController::class, 'create'])->name('admin.film.create');
-        Route::post('/film/store', [FilmController::class, 'store'])->name('admin.film.store');
-        Route::get('/film/edit/{id}', [FilmController::class, 'edit'])->name('admin.film.edit');
-        Route::put('/film/update/{id}', [FilmController::class, 'update'])->name('admin.film.update');
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+        Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::put('/users/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::group(['middleware' => ['can:crud author']], function () {
+            Route::get('/film', [FilmController::class, 'index'])->name('admin.film');
+            Route::get('/film/create', [FilmController::class, 'create'])->name('admin.film.create');
+            Route::post('/film/store', [FilmController::class, 'store'])->name('admin.film.store');
+            Route::get('/film/edit/{id}', [FilmController::class, 'edit'])->name('admin.film.edit');
+            Route::put('/film/update/{id}', [FilmController::class, 'update'])->name('admin.film.update');
+        });
     });
- });
-
+});
 
 require __DIR__ . '/auth.php';

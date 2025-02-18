@@ -18,10 +18,17 @@ class RoleSeeder extends Seeder
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $authorRole = Role::firstOrCreate(['name' => 'author']);
 
-        // Buat permission jika belum ada
-        $deleteCommentPermission = Permission::firstOrCreate(['name' => 'delete comment']);
+        $permissions = [
+            'crud admin',
+            'crud author',
+        ];
 
-        // Berikan permission ke role admin
-        $adminRole->givePermissionTo($deleteCommentPermission);
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $adminRole->givePermissionTo('crud admin');
+        $adminRole->givePermissionTo('crud author');
+        $authorRole->givePermissionTo('crud author');
     }
 }

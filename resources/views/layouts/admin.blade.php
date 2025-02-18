@@ -33,13 +33,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-neutral-300 dark:bg-neutral-700">
+<body class="bg-neutral-200 dark:bg-neutral-900">
+    @include('.layouts.admin.navbar')
     <div class="flex h-screen">
-        @include('layouts.admin.sidebar')
-        <div class="flex-1 flex flex-col">
-            @include('.layouts.admin.navbar')
+    @include('layouts.admin.sidebar')
+        <div class="flex-1 flex flex-col overflow-auto">
             <main class="p-6">
-                @yield('content')
+                <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md">
+                    @yield('content')
+                </div>
             </main>
         </div>
     </div>
@@ -55,6 +57,33 @@
     <!-- Link JS DataTables dan jQuery -->
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: "{!! session('success') !!}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "searching": true,
+                "dom": '<"top"f>rt<"bottom"ip><"clear">', // Search bar di sebelah kiri
+                "pagingType": "simple", // Tipe pagination yang lebih sederhana
+                "lengthMenu": [5, 10, 25, 50], // Opsi jumlah data per halaman
+                "pageLength": 5, // Jumlah data default per halaman
+                "responsive": true // Responsivitas tabel
+            });
+        });
+    </script>
 </body>
 
 </html>

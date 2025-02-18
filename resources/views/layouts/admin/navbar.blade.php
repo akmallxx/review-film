@@ -1,11 +1,16 @@
-<nav class="top-0 z-50 transition duration-300 bg-neutral-200 dark:bg-neutral-800">
+<nav class="top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <!-- Logo -->
+            <div class="shrink-0 flex items-center">
+                <a href="{{ route('admin') }}">
+                    <x-application-logo class="block h-9 w-auto fill-current text-neutral-800 dark:text-neutral-200" />
+                </a>
+            </div>
             <div class="flex-grow flex justify-center">
-
+                
             </div>
 
             <!-- Settings Dropdown or Login/Register Links -->
@@ -13,7 +18,7 @@
                 @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border  border-transparent leading-4 font-medium rounded-md text-neutral-900 dark:text-neutral-200 bg-neutral-300 dark:bg-neutral-700 hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border  border-transparent leading-4 font-medium rounded-md text-neutral-500 dark:text-neutral-400 bg-transparent hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-2">

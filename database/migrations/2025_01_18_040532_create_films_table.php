@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('pencipta');
             $table->text('trailer');
             $table->string('kategori_umur');
-            $table->integer('episode');
+            $table->integer('total_episode');
             $table->integer('id_users')->unsigned();
             $table->timestamps();
 
