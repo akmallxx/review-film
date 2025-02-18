@@ -10,5 +10,10 @@
                 <i class="bi bi-camera-reels me-2"></i>Film
             </x-sidebar-link>
         </li>
+        <li class="mb-2">
+            <x-sidebar-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.film')">
+                <i class="bi bi-camera-reels me-2"></i>User
+            </x-sidebar-link>
+        </li>
     </ul>
 </aside>

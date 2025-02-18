@@ -28,6 +28,7 @@ class RoleSeeder extends Seeder
         }
 
         $adminRole->givePermissionTo('crud admin');
+        $adminRole->givePermissionTo('crud author');
         $authorRole->givePermissionTo('crud author');
     }
 }
