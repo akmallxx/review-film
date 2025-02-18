@@ -37,9 +37,9 @@
     <?php echo $__env->make('.layouts.admin.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="flex h-screen">
     <?php echo $__env->make('layouts.admin.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        <div class="flex-1 flex flex-col overflow-auto">
+        <div class="flex-1 flex flex-col">
             <main class="p-6">
-                <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded shadow-md">
+                <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md">
                     <?php echo $__env->yieldContent('content'); ?>
                 </div>
             </main>
@@ -76,7 +76,6 @@
         $(document).ready(function() {
             $('#myTable').DataTable({
                 "searching": true,
-                "dom": '<"top"f>rt<"bottom"ip><"clear">', // Search bar di sebelah kiri
                 "pagingType": "simple", // Tipe pagination yang lebih sederhana
                 "lengthMenu": [5, 10, 25, 50], // Opsi jumlah data per halaman
                 "pageLength": 5, // Jumlah data default per halaman
