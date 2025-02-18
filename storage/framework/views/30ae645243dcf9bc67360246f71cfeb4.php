@@ -57,7 +57,7 @@
                     <a href="<?php echo e(route('film.detail', $film->slug)); ?>" class="block">
                         <div class="w-full relative">
                             <!-- Badge Total Rating -->
-                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                 ⭐ <?php echo e(number_format($film->average_rating, 1)); ?>
 
                             </div>
@@ -104,7 +104,7 @@
                         <a href="<?php echo e(route('film.detail', $movie->slug)); ?>" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                     ⭐ <?php echo e(number_format($movie->average_rating, 1)); ?>
 
                                 </div>
@@ -152,7 +152,7 @@
                         <a href="<?php echo e(route('film.detail', $serie->slug)); ?>" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                     ⭐ <?php echo e(number_format($serie->average_rating, 1)); ?>
 
                                 </div>
@@ -201,7 +201,7 @@
                         <a href="<?php echo e(route('film.detail', $anime->slug)); ?>" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                     ⭐ <?php echo e(number_format($anime->average_rating, 1)); ?>
 
                                 </div>

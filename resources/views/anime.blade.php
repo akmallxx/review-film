@@ -49,7 +49,7 @@
                     <a href="{{ route('film.detail', $film->slug) }}" class="block">
                         <div class="w-full relative">
                             <!-- Badge Total Rating -->
-                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                 ⭐ {{ number_format($film->average_rating, 1) }}
                             </div>
 
@@ -89,7 +89,7 @@
                     <a href="{{ route('film.detail', $anime->slug) }}" class="block">
                         <div class="w-full relative">
                             <!-- Badge Total Rating -->
-                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                 ⭐ {{ number_format($anime->average_rating, 1) }}
                             </div>
 
@@ -117,7 +117,7 @@
 
             </div>
             <nav aria-label="Page navigation example">
-                <ul class="flex items-center -space-x-px h-10 text-base justify-center mt-6">
+                <ul class="mt-8">
                     {{ $animes->links() }}
                 </ul>
             </nav>
