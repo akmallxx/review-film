@@ -10,10 +10,11 @@ class Film extends Model
 {
     use HasFactory;
 
+    // Model Film
     protected $table = "films";
-    protected $primaryKey = 'id'; // Pastikan kolom id_film ada di database, jika tidak gunakan 'id'
+    protected $primaryKey = 'id';
 
-    // Kolom-kolom yang dapat diisi secara mass assignment
+    // Kolom yang dapat diisi
     protected $fillable = [
         'judul',
         'slug',
@@ -29,6 +30,20 @@ class Film extends Model
         'kategori_umur'
     ];
 
+    // Relasi ke Genre melalui tabel pivot
+    public function genres()
+    {
+        // Relasi Many to Many ke Genre melalui tabel pivot genre_relations
+        return $this->belongsToMany(Genre::class, 'genre_relations', 'id_film', 'id_genre');
+    }
+
+    // Relasi ke User
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_users', 'id');
+    }
+
+    // Format durasi
     public function getDurasiFormatAttribute()
     {
         $jam = floor($this->durasi / 60);
@@ -41,40 +56,23 @@ class Film extends Model
         }
     }
 
-    // Relasi ke User
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_users', 'id');
-    }
-
-    // Relasi ke Genre melalui tabel pivot
-    public function genres()
-    {
-        return $this->belongsToMany(Genre::class, 'genre_relations', 'id_film', 'id_genre');
-    }
-
-    public function genre_relations()
-    {
-        return $this->hasMany(Genre_relation::class, 'id_film');
-    }
-
     // Relasi ke Comment
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'id_film');
+        return $this->hasMany(Comment::class, 'id');
     }
 
     // Relasi ke Casting
     public function castings()
     {
-        return $this->hasMany(Casting::class, 'id_film'); // Tidak perlu mendefinisikan foreign key dan local key jika mengikuti konvensi default
+        return $this->hasMany(Casting::class, 'id');
     }
 
     // Akses poster sebagai URL yang benar
     public function getPosterUrlAttribute()
     {
         if (filter_var($this->poster, FILTER_VALIDATE_URL)) {
-            return $this->poster; // Jika sudah berupa URL, langsung dikembalikan
+            return $this->poster;
         }
         return asset('storage/' . $this->poster);
     }

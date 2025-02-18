@@ -48,16 +48,26 @@
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="{{ route('film.detail', $film->slug) }}" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="{{ $film->poster_url }}"
-                                alt="{{ $film->judul }}" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ {{ number_format($film->average_rating, 1) }}
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="{{ $film->poster_url }}"
+                                    alt="{{ $film->judul }}" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow">{{ $film->judul }}</h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                {{ $film->judul }}
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                 {{ $film->tahun_rilis }}
                             </p>
                         </div>
@@ -78,16 +88,26 @@
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="{{ route('film.detail', $anime->slug) }}" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="{{ $anime->poster_url }}"
-                                alt="{{ $anime->judul }}" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ {{ number_format($anime->average_rating, 1) }}
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="{{ $anime->poster_url }}"
+                                    alt="{{ $anime->judul }}" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow">{{ $anime->judul }}</h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                {{ $anime->judul }}
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                 {{ $anime->tahun_rilis }}
                             </p>
                         </div>

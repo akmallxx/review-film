@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Movies - ' . config('app.name', 'Laravel')); ?>
+<?php $__env->startSection('title', 'Anime - ' . config('app.name', 'Laravel')); ?>
 <?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
 <?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -58,16 +58,28 @@
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="<?php echo e(route('film.detail', $film->slug)); ?>" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="<?php echo e($film->poster_url); ?>"
-                                alt="<?php echo e($film->judul); ?>" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ <?php echo e(number_format($film->average_rating, 1)); ?>
+
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="<?php echo e($film->poster_url); ?>"
+                                    alt="<?php echo e($film->judul); ?>" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow"><?php echo e($film->judul); ?></h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                <?php echo e($film->judul); ?>
+
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                 <?php echo e($film->tahun_rilis); ?>
 
                             </p>
@@ -81,25 +93,37 @@
         <?php else: ?>
         <div class="mx-auto px-4 sm:px-6 lg:px-0">
             <div class="flex justify-between border-l-4 border-red-600">
-                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">MOVIES</h2>
+                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">ANIME</h2>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
 
-                <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $animes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $anime): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="relative max-w-sm overflow-hidden group">
-                    <a href="<?php echo e(route('film.detail', $movie->slug)); ?>" class="block">
+                    <a href="<?php echo e(route('film.detail', $anime->slug)); ?>" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="<?php echo e($movie->poster_url); ?>"
-                                alt="<?php echo e($movie->judul); ?>" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-yellow-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ <?php echo e(number_format($anime->average_rating, 1)); ?>
+
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="<?php echo e($anime->poster_url); ?>"
+                                    alt="<?php echo e($anime->judul); ?>" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow"><?php echo e($movie->judul); ?></h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                <?php echo e($anime->judul); ?>
+
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
-                                <?php echo e($movie->tahun_rilis); ?>
+                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
+                                <?php echo e($anime->tahun_rilis); ?>
 
                             </p>
                         </div>
@@ -109,8 +133,8 @@
 
             </div>
             <nav aria-label="Page navigation example">
-                <ul class="">
-                    <?php echo e($movies->links()); ?>
+                <ul class="flex items-center -space-x-px h-10 text-base justify-center mt-6">
+                    <?php echo e($animes->links()); ?>
 
                 </ul>
             </nav>
@@ -128,4 +152,4 @@
 <?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
 <?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
 <?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?><?php /**PATH D:\NGODING\review-film\resources\views/movies.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH E:\review-film\resources\views/anime.blade.php ENDPATH**/ ?>

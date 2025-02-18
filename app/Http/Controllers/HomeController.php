@@ -20,31 +20,45 @@ class HomeController extends Controller
         $genres = Genre::all();
 
         if ($search || $search_genre) {
-            // Jika ada query pencarian, tampilkan hasil pencarian berdasarkan slug, kategori, dan genre
             $films = Film::query();
 
-            // Jika ada pencarian berdasarkan slug atau kategori_film
             if ($search) {
                 $films = $films->where('slug', 'like', '%' . $search . '%')
                     ->orWhere('kategori_film', 'like', '%' . $search . '%');
             }
 
-            // Jika ada pencarian berdasarkan genre
             if ($search_genre) {
-                $films = $films->whereHas('genre_relations.genre', function ($query) use ($search_genre) {
+                $films = $films->whereHas('genres', function ($query) use ($search_genre) {
                     $query->where('slug', 'like', '%' . $search_genre . '%');
                 });
             }
 
-            // Ambil data film berdasarkan kondisi pencarian yang sudah digabung
             $films = $films->get();
+
+            // Menambahkan rating rata-rata ke setiap film
+            $films->each(function ($film) {
+                $film->average_rating = $this->calculateAverageRating($film->id);
+            });
 
             return view('home', compact('films', 'search', 'search_genre', 'genres'));
         } else {
-            // Jika tidak ada query pencarian, tampilkan data default
             $movies = Film::latest()->where('kategori_film', 'movies')->take(12)->get();
             $series = Film::latest()->where('kategori_film', 'series')->take(12)->get();
             $animes = Film::latest()->where('kategori_film', 'anime')->take(12)->get();
+
+            // Menambahkan rating rata-rata ke setiap film
+            $movies->each(function ($movie) {
+                $movie->average_rating = $this->calculateAverageRating($movie->id);
+            });
+
+            $series->each(function ($series) {
+                $series->average_rating = $this->calculateAverageRating($series->id);
+            });
+
+            $animes->each(function ($anime) {
+                $anime->average_rating = $this->calculateAverageRating($anime->id);
+            });
+
             return view('home', compact('movies', 'series', 'animes', 'genres'));
         }
     }
@@ -63,16 +77,27 @@ class HomeController extends Controller
             }
 
             if ($search_genre) {
-                $films = $films->whereHas('genre_relations.genre', function ($query) use ($search_genre) {
+                $films = $films->whereHas('genres', function ($query) use ($search_genre) {
                     $query->where('slug', 'like', '%' . $search_genre . '%');
                 });
             }
 
             $films = $films->get();
 
+            // Menambahkan rating rata-rata ke setiap film
+            $films->each(function ($film) {
+                $film->average_rating = $this->calculateAverageRating($film->id);
+            });
+
             return view('movies', compact('films', 'search', 'search_genre', 'genres'));
         } else {
             $movies = Film::latest()->where('kategori_film', 'movies')->paginate(12);
+
+            // Menambahkan rating rata-rata ke setiap film
+            $movies->each(function ($movie) {
+                $movie->average_rating = $this->calculateAverageRating($movie->id);
+            });
+
             return view('movies', compact('movies', 'genres'));
         }
     }
@@ -91,16 +116,27 @@ class HomeController extends Controller
             }
 
             if ($search_genre) {
-                $films = $films->whereHas('genre_relations.genre', function ($query) use ($search_genre) {
+                $films = $films->whereHas('genres', function ($query) use ($search_genre) {
                     $query->where('slug', 'like', '%' . $search_genre . '%');
                 });
             }
 
             $films = $films->get();
 
+            // Menambahkan rating rata-rata ke setiap film
+            $films->each(function ($film) {
+                $film->average_rating = $this->calculateAverageRating($film->id);
+            });
+
             return view('series', compact('films', 'search', 'search_genre', 'genres'));
         } else {
             $series = Film::latest()->where('kategori_film', 'series')->paginate(12);
+
+            // Menambahkan rating rata-rata ke setiap film
+            $series->each(function ($series) {
+                $series->average_rating = $this->calculateAverageRating($series->id);
+            });
+
             return view('series', compact('series', 'genres'));
         }
     }
@@ -119,19 +155,31 @@ class HomeController extends Controller
             }
 
             if ($search_genre) {
-                $films = $films->whereHas('genre_relations.genre', function ($query) use ($search_genre) {
+                $films = $films->whereHas('genres', function ($query) use ($search_genre) {
                     $query->where('slug', 'like', '%' . $search_genre . '%');
                 });
             }
 
             $films = $films->get();
 
+            // Menambahkan rating rata-rata ke setiap film
+            $films->each(function ($film) {
+                $film->average_rating = $this->calculateAverageRating($film->id);
+            });
+
             return view('anime', compact('films', 'search', 'search_genre', 'genres'));
         } else {
             $animes = Film::latest()->where('kategori_film', 'anime')->paginate(12);
+
+            // Menambahkan rating rata-rata ke setiap film
+            $animes->each(function ($anime) {
+                $anime->average_rating = $this->calculateAverageRating($anime->id);
+            });
+
             return view('anime', compact('animes', 'genres'));
         }
     }
+
 
     public function show($slug)
     {
@@ -150,18 +198,35 @@ class HomeController extends Controller
 
         $countComment = Comment::where('id_user', auth()->id())->where('id_film', $film->id)->count();
 
-        $ratings = Comment::where('id_film', $film->id)->pluck('rating');
+        // Ambil rating dari komentar tanpa rating dari role admin dan author
+        $ratings = Comment::where('id_film', $film->id)
+            ->whereHas('user', function ($query) {
+                $query->whereDoesntHave('roles', function ($roleQuery) {
+                    $roleQuery->whereIn('name', ['admin', 'author']); // Mengabaikan role admin dan author
+                });
+            })
+            ->pluck('rating');
 
         $numberOfComments = $ratings->count() ?? 0;
-        if ($ratings->isNotEmpty()) {
-            $totalRatings = $ratings->sum();
-            $numberOfComments = $ratings->count();
-            $averageRating = $totalRatings / $numberOfComments;
-            $roundedAverage = round($averageRating, 1); // Bulatkan ke 1 desimal
-        } else {
-            $roundedAverage = 0;
-        }
+        $roundedAverage = $this->calculateAverageRating($film->id);
 
         return view('detail', get_defined_vars());
+    }
+
+    private function calculateAverageRating($filmId)
+    {
+        $ratings = Comment::where('id_film', $filmId)
+            ->whereHas('user', function ($query) {
+                $query->whereDoesntHave('roles', function ($roleQuery) {
+                    $roleQuery->whereIn('name', ['admin', 'author']);
+                });
+            })
+            ->pluck('rating');
+
+        if ($ratings->isNotEmpty()) {
+            return round($ratings->sum() / $ratings->count(), 1);
+        }
+
+        return 0;
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FilmController;
+use App\Http\Controllers\Admin\GenreRelationsController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,13 @@ Route::group(['middleware' => ['can:crud author']], function () {
         Route::get('/film/edit/{id}', [FilmController::class, 'edit'])->name('admin.film.edit');
         Route::put('/film/update/{id}', [FilmController::class, 'update'])->name('admin.film.update');
         Route::delete('/film/delete/{id}', [FilmController::class, 'destroy'])->name('admin.film.delete');
+        
+        Route::get('/genre-relations', [GenreRelationsController::class, 'index'])->name('admin.genre-relations');
+        Route::get('/genre-relations/create', [GenreRelationsController::class, 'create'])->name('admin.genre-relations.create');
+        Route::post('/genre-relations/store', [GenreRelationsController::class, 'store'])->name('admin.genre-relations.store');
+        Route::get('/genre-relations/edit/{id}', [GenreRelationsController::class, 'edit'])->name('admin.genre-relations.edit');
+        Route::put('/genre-relations/update/{id}', [GenreRelationsController::class, 'update'])->name('admin.genre-relations.update');
+        Route::delete('/genre-relations/delete/{id}', [GenreRelationsController::class, 'destroy'])->name('admin.genre-relations.delete');
         
         Route::group(['middleware' => ['can:crud admin']], function () {
             Route::get('/users', [UserController::class, 'index'])->name('admin.users');

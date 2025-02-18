@@ -10,6 +10,11 @@
                 <i class="bi bi-camera-reels me-2"></i>Film
             </x-sidebar-link>
         </li>
+        <li class="mb-2">
+            <x-sidebar-link href="{{ route('admin.genre-relations') }}" :active="request()->routeIs('admin.genre-relations')">
+                <i class="bi bi-list-ul me-2"></i>Genre Relation
+            </x-sidebar-link>
+        </li>
         @can('crud admin')
         <li class="mb-2">
             <x-sidebar-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users')">
