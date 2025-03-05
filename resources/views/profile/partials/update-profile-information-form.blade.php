@@ -13,9 +13,27 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('patch')
+
+        <!-- Avatar -->
+        <div>
+            <x-input-label for="avatar" :value="__('Avatar')" />
+            <div class="mt-2 flex items-center gap-4">
+                @if(auth()->user()->avatar)
+                    <a data-fancybox="gallery" href="{{ asset('storage/' . auth()->user()->avatar) }}">
+                        <img class="w-24 h-20 rounded-full" src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="User Avatar">
+                    </a>
+                @else
+                    <a data-fancybox="gallery" href="{{ asset('storage/avatars/default-avatar.png') }}">
+                        <img class="w-24 h-20 rounded-full" src="{{ asset('storage/avatars/default-avatar.png') }}" alt="User Avatar">
+                    </a>
+                @endif
+                <input type="file" name="avatar" id="avatar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -56,9 +74,12 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                    class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
             @endif
         </div>
     </form>
 </section>
+
+<!-- Fancybox CSS & JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>

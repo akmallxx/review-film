@@ -43,21 +43,31 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN UNTUK: {{ $search }}</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                 @foreach($films as $film)
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="{{ route('film.detail', $film->slug) }}" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="{{ $film->poster_url }}"
-                                alt="{{ $film->judul }}" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ {{ number_format($film->average_rating, 1) }}
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="{{ $film->poster_url }}"
+                                    alt="{{ $film->judul }}" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow">{{ $film->judul }}</h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                {{ $film->judul }}
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                 {{ $film->tahun_rilis }}
                             </p>
                         </div>
@@ -72,22 +82,32 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">SERIES</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
 
                 @foreach ($series as $serie)
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="{{ route('film.detail', $serie->slug) }}" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="{{ $serie->poster_url }}"
-                                alt="{{ $serie->judul }}" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ {{ number_format($serie->average_rating, 1) }}
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="{{ $serie->poster_url }}"
+                                    alt="{{ $serie->judul }}" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow">{{ $serie->judul }}</h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                {{ $serie->judul }}
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                 {{ $serie->tahun_rilis }}
                             </p>
                         </div>
@@ -97,7 +117,7 @@
 
             </div>
             <nav aria-label="Page navigation example">
-                <ul class="flex items-center -space-x-px h-10 text-base justify-center mt-6">
+                <ul class="mt-8">
                     {{ $series->links() }}
                 </ul>
             </nav>

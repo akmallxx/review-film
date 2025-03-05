@@ -16,19 +16,14 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new user.
-     */
-    public function create()
+    public function create($user = null)
     {
         return view('admin.users.create');
     }
 
-    /**
-     * Store a newly created user in storage.
-     */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -47,65 +42,48 @@ class UserController extends Controller
 
         $user->assignRole($request->role);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        return redirect()->route('admin.users')->with('success', 'User created successfully');
     }
 
-    /**
-     * Display the specified user.
-     */
-    public function show(User $user)
-    {
-        return view('admin.users.show', compact('user'));
-    }
-
-    /**
-     * Show the form for editing the specified user.
-     */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.create', compact('user'));
     }
 
-    /**
-     * Update the specified user in storage.
-     */
     public function update(Request $request, User $user)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'sometimes|string|min:8',
+            'password' => 'nullable|string|min:8',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if ($request->has('name')) {
+        if ($request->filled('name')) {
             $user->name = $request->name;
         }
-        if ($request->has('email')) {
+        if ($request->filled('email')) {
             $user->email = $request->email;
         }
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-        if ($request->has('role')) {
+        if ($request->filled('role')) {
             $user->syncRoles($request->role);  // Menggunakan syncRoles untuk mengganti role
         }
 
         $user->save();
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully');
+        return redirect()->route('admin.users')->with('success', 'User updated successfully');
     }
 
-    /**
-     * Remove the specified user from storage.
-     */
     public function destroy(User $user)
     {
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully');
     }
 }

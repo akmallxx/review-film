@@ -1,4 +1,8 @@
-<nav x-data="{ open: false }" class="sticky top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg px-4 md:px-4 sm:px-4">
+<nav x-data="{ open: false, scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
+    :class="scrolled ? 'bg-white dark:bg-neutral-900 shadow-lg' : 'bg-transparent'"
+    class="sticky top-0 z-50 transition duration-300 px-4 md:px-4 sm:px-4">
+
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto">
@@ -33,11 +37,15 @@
                 @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border  border-transparent leading-4 font-medium rounded-md text-neutral-500 dark:text-neutral-400 bg-transparent hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-neutral-500 dark:text-neutral-400 bg-transparent hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
-                            <div class="ms-2">
-                                <img class="h-8 w-8 rounded-full object-cover" src="https://www.w3schools.com/w3images/avatar1.png" alt="User Avatar">
+                            <div class="ms-3">
+                                @if(auth()->user()->avatar)
+                                <img class="h-9 w-9 rounded-full object-cover" src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="User Avatar">
+                                @else
+                                <img class="h-9 w-9 rounded-full object-cover" src="{{ asset('storage/avatars/default-avatar.png') }}" alt="User Avatar">
+                                @endif
                             </div>
                         </button>
                     </x-slot>
@@ -48,7 +56,7 @@
                         </x-dropdown-link>
 
                         <!-- Check if user has 'admin' role -->
-                        @if(auth()->user()->hasRole('admin'))
+                        @if(auth()->user()->can('crud author'))
                         <x-dropdown-link :href="route('admin')">
                             {{ __('Admin Dashboard') }}
                         </x-dropdown-link>

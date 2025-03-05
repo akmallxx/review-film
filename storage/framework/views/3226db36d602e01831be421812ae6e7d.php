@@ -51,21 +51,33 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                 <?php $__currentLoopData = $films; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $film): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="<?php echo e(route('film.detail', $film->slug)); ?>" class="block">
                         <div class="w-full relative">
-                            <!-- Poster -->
-                            <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                src="<?php echo e($film->poster_url); ?>"
-                                alt="<?php echo e($film->judul); ?>" />
+                            <!-- Badge Total Rating -->
+                            <div class="absolute top-2 left-2 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                ⭐ <?php echo e(number_format($film->average_rating, 1)); ?>
+
+                            </div>
+
+                            <!-- Poster dengan efek hover -->
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    src="<?php echo e($film->poster_url); ?>"
+                                    alt="<?php echo e($film->judul); ?>" />
+                                <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                            </div>
                         </div>
-                        <div class="dark:text-white bg-transparent p-1">
-                            <!-- Judul -->
-                            <h5 class="text-sm font-bold drop-shadow"><?php echo e($film->judul); ?></h5>
+                        <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                            <!-- Judul dengan tinggi minimal -->
+                            <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                <?php echo e($film->judul); ?>
+
+                            </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300">
+                            <p class="text-xs dark:text-neutral-300 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">
                                 <?php echo e($film->tahun_rilis); ?>
 
                             </p>
@@ -86,21 +98,33 @@
                         <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                     <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="relative max-w-sm overflow-hidden group">
                         <a href="<?php echo e(route('film.detail', $movie->slug)); ?>" class="block">
                             <div class="w-full relative">
-                                <!-- Poster -->
-                                <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                    src="<?php echo e($movie->poster_url); ?>"
-                                    alt="<?php echo e($movie->judul); ?>" />
+                                <!-- Badge Total Rating -->
+                                <div class="absolute top-2 left-2 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                    ⭐ <?php echo e(number_format($movie->average_rating, 1)); ?>
+
+                                </div>
+
+                                <!-- Poster dengan efek hover -->
+                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
+                                    <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                        src="<?php echo e($movie->poster_url); ?>"
+                                        alt="<?php echo e($movie->judul); ?>" />
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                                </div>
                             </div>
-                            <div class="dark:text-white bg-transparent p-1">
-                                <!-- Judul -->
-                                <h5 class="text-sm font-bold drop-shadow"><?php echo e($movie->judul); ?></h5>
+                            <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                                <!-- Judul dengan tinggi minimal -->
+                                <h5 class="text-sm font-bold min-h-[40px] group-hover:text-red-500">
+                                    <?php echo e($movie->judul); ?>
+
+                                </h5>
                                 <!-- Tahun Rilis -->
-                                <p class="text-xs dark:text-gray-300">
+                                <p class="text-xs dark:text-neutral-300 group-hover:text-neutral-500 dark:group-hover:text-neutral-200">
                                     <?php echo e($movie->tahun_rilis); ?>
 
                                 </p>
@@ -122,21 +146,33 @@
                         <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                     <?php $__currentLoopData = $series; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $serie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="relative max-w-sm overflow-hidden group">
                         <a href="<?php echo e(route('film.detail', $serie->slug)); ?>" class="block">
                             <div class="w-full relative">
-                                <!-- Poster -->
-                                <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                    src="<?php echo e($serie->poster_url); ?>"
-                                    alt="<?php echo e($serie->judul); ?>" />
+                                <!-- Badge Total Rating -->
+                                <div class="absolute top-2 left-2 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                    ⭐ <?php echo e(number_format($serie->average_rating, 1)); ?>
+
+                                </div>
+
+                                <!-- Poster dengan efek hover -->
+                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
+                                    <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                        src="<?php echo e($serie->poster_url); ?>"
+                                        alt="<?php echo e($serie->judul); ?>" />
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                                </div>
                             </div>
-                            <div class="dark:text-white bg-transparent p-1">
-                                <!-- Judul -->
-                                <h5 class="text-sm font-bold drop-shadow"><?php echo e($serie->judul); ?></h5>
+                            <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                                <!-- Judul dengan tinggi minimal -->
+                                <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                    <?php echo e($serie->judul); ?>
+
+                                </h5>
                                 <!-- Tahun Rilis -->
-                                <p class="text-xs dark:text-gray-300">
+                                <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                     <?php echo e($serie->tahun_rilis); ?>
 
                                 </p>
@@ -158,22 +194,34 @@
                         <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
 
                     <?php $__currentLoopData = $animes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $anime): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="relative max-w-sm overflow-hidden group">
                         <a href="<?php echo e(route('film.detail', $anime->slug)); ?>" class="block">
                             <div class="w-full relative">
-                                <!-- Poster -->
-                                <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
-                                    src="<?php echo e($anime->poster_url); ?>"
-                                    alt="<?php echo e($anime->judul); ?>" />
+                                <!-- Badge Total Rating -->
+                                <div class="absolute top-2 left-2 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                    ⭐ <?php echo e(number_format($anime->average_rating, 1)); ?>
+
+                                </div>
+
+                                <!-- Poster dengan efek hover -->
+                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
+                                    <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                        src="<?php echo e($anime->poster_url); ?>"
+                                        alt="<?php echo e($anime->judul); ?>" />
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
+                                </div>
                             </div>
-                            <div class="dark:text-white bg-transparent p-1">
-                                <!-- Judul -->
-                                <h5 class="text-sm font-bold drop-shadow"><?php echo e($anime->judul); ?></h5>
+                            <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
+                                <!-- Judul dengan tinggi minimal -->
+                                <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                    <?php echo e($anime->judul); ?>
+
+                                </h5>
                                 <!-- Tahun Rilis -->
-                                <p class="text-xs dark:text-gray-300">
+                                <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
                                     <?php echo e($anime->tahun_rilis); ?>
 
                                 </p>
@@ -198,4 +246,9 @@
 <?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
 <?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
 <?php endif; ?>
-<?php /**PATH D:\NGODING\review-film\resources\views/home.blade.php ENDPATH**/ ?>
+
+<?php $__env->startSection('style-content'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script-content'); ?>
+<?php $__env->stopSection(); ?><?php /**PATH D:\NGODING\review-film\resources\views/home.blade.php ENDPATH**/ ?>

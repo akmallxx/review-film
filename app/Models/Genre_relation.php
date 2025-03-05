@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Genre_relation extends Model
 {
     use HasFactory;
-    
+
+    // Model Genre_relation
     protected $table = 'genre_relations';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['id_film', 'id_genre'];
 
     // Relasi ke Film
     public function film()
     {
-        return $this->belongsTo(Film::class);
+        return $this->belongsTo(Film::class, 'id_film');
     }
 
     // Relasi ke Genre

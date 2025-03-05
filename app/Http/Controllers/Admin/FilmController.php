@@ -14,10 +14,20 @@ class FilmController extends Controller
 {
     public function index()
     {
-        $films = Film::all();
+        $user = auth()->user(); // Ambil data pengguna yang sedang login
+
+        // Cek apakah pengguna memiliki izin 'crud admin'
+        if ($user->can('crud admin')) {
+            $films = Film::all(); // Jika admin, tampilkan semua film
+        } elseif ($user->can('crud author')) {
+            $films = Film::where('id_users', $user->id)->get(); // Jika author, hanya tampilkan film yang dipostingnya
+        } else {
+            $films = collect(); // Jika tidak memiliki izin, tampilkan koleksi kosong
+        }
+
         $columns = array_map('strtoupper', DB::getSchemaBuilder()->getColumnListing('films'));
 
-        return view('admin.film.index', get_defined_vars());
+        return view('admin.film.index', compact('films', 'columns'));
     }
 
     public function create($id = null)
@@ -138,6 +148,13 @@ class FilmController extends Controller
             'poster' => $posterPath,
         ]);
 
-        return redirect()->route('admin.film')->with('success', 'Film updated successfully!');
+        return redirect()->route('admin.film')->with('success', 'Film berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+        Film::findOrFail($id)->delete();
+
+        return redirect()->route('admin.film')->with('success', 'Film berhasi dihapus');
     }
 }
