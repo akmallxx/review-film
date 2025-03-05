@@ -22,7 +22,7 @@ class GenreRelationsController extends Controller
         return view('admin.genre-relations.index', compact('films', 'genres', 'genre_relations'));
     }
 
-    public function create($id = null)
+    public function create($film = null)
     {
         $genres = Genre::all();
         $filmList = Film::all();
@@ -64,27 +64,13 @@ class GenreRelationsController extends Controller
     {
         // Validasi data
         $request->validate([
-            'film' => 'required|exists:films,id',
             'id_genre' => 'array',
             'id_genre.*' => 'exists:genres,id'
         ]);
 
-        // Cari film berdasarkan ID
         $film = Film::findOrFail($id);
+        $film->genres()->sync($request->id_genre ?? []);
 
-        // Ambil genre yang sudah ada terkait dengan film ini
-        $existingGenres = $film->genres->pluck('id')->toArray();
-
-        // Ambil genre yang dikirimkan melalui request
-        $newGenres = $request->id_genre ?? [];
-
-        // Filter untuk genre yang belum ada di relasi, agar hanya menambahkan genre baru yang belum ada
-        $genresToAdd = array_diff($newGenres, $existingGenres);
-
-        // Update genre-film di pivot table hanya dengan genre baru yang belum ada
-        if (count($genresToAdd) > 0) {
-            $film->genres()->syncWithoutDetaching($genresToAdd); // Tidak menghapus genre yang tidak terpilih
-        }
 
         return redirect()->route('admin.genre-relations')->with('success', 'Data genre berhasil diperbarui!');
     }

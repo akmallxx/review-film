@@ -53,7 +53,7 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN UNTUK: <?php echo e($search); ?></h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                 <?php $__currentLoopData = $films; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $film): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="<?php echo e(route('film.detail', $film->slug)); ?>" class="block">
@@ -65,7 +65,7 @@
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                 <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                     src="<?php echo e($film->poster_url); ?>"
                                     alt="<?php echo e($film->judul); ?>" />
@@ -95,7 +95,7 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">MOVIES</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
 
                 <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="relative max-w-sm overflow-hidden group">
@@ -108,7 +108,7 @@
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                 <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                     src="<?php echo e($movie->poster_url); ?>"
                                     alt="<?php echo e($movie->judul); ?>" />

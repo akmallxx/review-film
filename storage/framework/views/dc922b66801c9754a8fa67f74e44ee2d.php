@@ -3,12 +3,12 @@
 <?php $__env->startSection('content'); ?>
 
 <div class="flex justify-between mb-8">
-    <h2 class="text-3xl font-bold text-neutral-900 dark:text-white">Tabel Pengguna</h2>
+    <h2 class="text-3xl font-bold text-neutral-900 dark:text-white">Tabel Genre Relasi</h2>
 
     <!-- Create User Button -->
     <a href="<?php echo e(route('admin.genre-relations.create')); ?>"
         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <i class="bi bi-plus-circle me-2"></i>Tambah Pengguna
+        <i class="bi bi-plus-circle me-2"></i>Tambah Genre Relasi
     </a>
 </div>
 
@@ -31,13 +31,13 @@
 
             </td>
             <td class="p-4 text-xs text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">
-                <!-- <a href="<?php echo e(route('admin.genre-relations.edit', $gr->first()->id_film)); ?>"
-                    class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Edit</a> -->
+                <a href="<?php echo e(route('admin.genre-relations.edit', $gr->first()->id_film)); ?>"
+                    class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Edit</a>
 
                 <form id="delete-form-<?php echo e($gr->first()->id); ?>" action="<?php echo e(route('admin.genre-relations.delete', $gr->first()->id)); ?>" method="POST" style="display:inline;">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('DELETE'); ?>
-                    <button type="button" class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300" onclick="confirmDelete(<?php echo e($gr->first()->id); ?>)">Delete</button>
+                    <button type="button" class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300" onclick="confirmDelete('<?php echo e($gr->first()->id); ?>')">Delete</button>
                 </form>
             </td>
         </tr>

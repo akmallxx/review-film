@@ -51,7 +51,7 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                 <?php $__currentLoopData = $films; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $film): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="<?php echo e(route('film.detail', $film->slug)); ?>" class="block">
@@ -63,7 +63,7 @@
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                 <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                     src="<?php echo e($film->poster_url); ?>"
                                     alt="<?php echo e($film->judul); ?>" />
@@ -77,7 +77,7 @@
 
                             </h5>
                             <!-- Tahun Rilis -->
-                            <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
+                            <p class="text-xs dark:text-neutral-300 group-hover:text-neutral-700 dark:group-hover:text-neutral-200">
                                 <?php echo e($film->tahun_rilis); ?>
 
                             </p>
@@ -98,7 +98,7 @@
                         <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                     <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="relative max-w-sm overflow-hidden group">
                         <a href="<?php echo e(route('film.detail', $movie->slug)); ?>" class="block">
@@ -110,7 +110,7 @@
                                 </div>
 
                                 <!-- Poster dengan efek hover -->
-                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                     <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                         src="<?php echo e($movie->poster_url); ?>"
                                         alt="<?php echo e($movie->judul); ?>" />
@@ -119,12 +119,12 @@
                             </div>
                             <div class="dark:text-white bg-transparent p-2 flex flex-col justify-between min-h-[70px]">
                                 <!-- Judul dengan tinggi minimal -->
-                                <h5 class="text-sm font-bold drop-shadow min-h-[40px] group-hover:text-red-500">
+                                <h5 class="text-sm font-bold min-h-[40px] group-hover:text-red-500">
                                     <?php echo e($movie->judul); ?>
 
                                 </h5>
                                 <!-- Tahun Rilis -->
-                                <p class="text-xs dark:text-gray-300 group-hover:text-gray-200">
+                                <p class="text-xs dark:text-neutral-300 group-hover:text-neutral-500 dark:group-hover:text-neutral-200">
                                     <?php echo e($movie->tahun_rilis); ?>
 
                                 </p>
@@ -146,7 +146,7 @@
                         <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                     <?php $__currentLoopData = $series; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $serie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="relative max-w-sm overflow-hidden group">
                         <a href="<?php echo e(route('film.detail', $serie->slug)); ?>" class="block">
@@ -158,7 +158,7 @@
                                 </div>
 
                                 <!-- Poster dengan efek hover -->
-                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                     <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                         src="<?php echo e($serie->poster_url); ?>"
                                         alt="<?php echo e($serie->judul); ?>" />
@@ -194,7 +194,7 @@
                         <span class="bg-red-800 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm hover:text-gray-400 dark:text-white">LIHAT SEMUA <i class="bi bi-arrow-right"></i></span>
                     </a>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
 
                     <?php $__currentLoopData = $animes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $anime): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="relative max-w-sm overflow-hidden group">
@@ -207,7 +207,7 @@
                                 </div>
 
                                 <!-- Poster dengan efek hover -->
-                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                     <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                         src="<?php echo e($anime->poster_url); ?>"
                                         alt="<?php echo e($anime->judul); ?>" />
@@ -245,4 +245,40 @@
 <?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
 <?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
 <?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?><?php /**PATH E:\review-film\resources\views/home.blade.php ENDPATH**/ ?>
+<?php endif; ?>
+
+<?php $__env->startSection('css-content'); ?>
+<style>
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script-content'); ?>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true,
+        },
+    });
+</script>
+<?php $__env->stopSection(); ?><?php /**PATH E:\review-film\resources\views/home.blade.php ENDPATH**/ ?>

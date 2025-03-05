@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');
+            $table->text(column: 'comment');
             $table->enum('rating', [1, 2, 3, 4, 5]);
             $table->integer('id_user')->unsigned();
             $table->unsignedBigInteger('id_film');

@@ -6,12 +6,15 @@
     <h2 class="text-3xl font-bold text-neutral-900 dark:text-white mb-8">FORM TAMBAH GENRE RELASI</h2>
     <div class="p-4 md:p-5 space-y-4">
         @php
-            // URL for form submission based on whether it's create or update
-            $url = isset($genreRelasi) ? route('admin.genre-relations.update', $genreRelasi->id) : route('admin.genre-relations.store');
+        if (isset($film->id)) {
+        $url = route('admin.genre-relations.update', $film->id);
+        } else {
+        $url = route('admin.genre-relations.store');
+        }
         @endphp
         <form action="{{ $url }}" method="POST" id="genreRelasiForm" class="text-left">
             @csrf
-            @if (isset($genreRelasi))
+            @if (isset($film->id))
                 @method('PUT')
             @endif
 

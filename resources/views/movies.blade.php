@@ -43,7 +43,7 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN UNTUK: {{ $search }}</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                 @foreach($films as $film)
                 <div class="relative max-w-sm overflow-hidden group">
                     <a href="{{ route('film.detail', $film->slug) }}" class="block">
@@ -54,7 +54,7 @@
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                 <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                     src="{{ $film->poster_url }}"
                                     alt="{{ $film->judul }}" />
@@ -82,7 +82,7 @@
             <div class="flex justify-between border-l-4 border-red-600">
                 <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">MOVIES</h2>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
 
                 @foreach ($movies as $movie)
                 <div class="relative max-w-sm overflow-hidden group">
@@ -94,7 +94,7 @@
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
                                 <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                                     src="{{ $movie->poster_url }}"
                                     alt="{{ $movie->judul }}" />

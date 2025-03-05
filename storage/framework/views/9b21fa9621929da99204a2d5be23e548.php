@@ -36,10 +36,10 @@
 <body class="bg-neutral-200 dark:bg-neutral-950">
     <?php echo $__env->make('.layouts.admin.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="flex h-screen">
-    <?php echo $__env->make('layouts.admin.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('layouts.admin.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="flex-1 flex flex-col">
             <main class="p-6">
-                <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md">
+                <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md ms-64 mt-16">
                     <?php echo $__env->yieldContent('content'); ?>
                 </div>
             </main>
@@ -50,36 +50,54 @@
 
     <!-- Tambahkan SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <!-- Link CSS DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 
     <!-- Link JS DataTables dan jQuery -->
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
     <?php if(session('success')): ?>
-    <script>
-        Swal.fire({
-            title: 'Success!',
-            text: "<?php echo session('success'); ?>",
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    </script>
+        <script>
+            Swal.fire({
+                title: 'Success!',
+                text: "<?php echo session('success'); ?>",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
     <?php endif; ?>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable({
-                "searching": true,
-                "pagingType": "simple", // Tipe pagination yang lebih sederhana
-                "lengthMenu": [5, 10, 25, 50], // Opsi jumlah data per halaman
-                "pageLength": 5, // Jumlah data default per halaman
-                "responsive": true // Responsivitas tabel
+                "pagingType": "simple",
+                "responsive": true,
+                "autoWidth": false,
+                "language": {
+                    "search": "Cari:",
+                    "lengthMenu": "Tampilkan _MENU_ entri",
+                    "info": "<p class='dark:text-white'>Menampilkan _START_ sampai _END_ dari _TOTAL_ entri</p>",
+                    "infoEmpty": "<p class='dark:text-white'>Menampilkan 0 sampai 0 dari 0 entri</p>",
+                    "infoFiltered": "<p class='dark:text-white'>(difilter dari _MAX_ total entri)</p>",
+                    "paginate": {
+                        "first": "Awal",
+                        "last": "Akhir",
+                        "next": "Berikutnya",
+                        "previous": "Sebelumnya"
+                    },
+                },
+                "dom": '<"flex justify-between items-center mb-4"lf>t<"flex justify-between items-center mt-4"ip>',
+                "initComplete": function () {
+                    $(".dataTables_length select").addClass("px-4 py-2 border rounded-lg bg-white dark:bg-neutral-800 dark:text-white");
+                    $(".dataTables_length select option").addClass("px-4 py-2 border rounded-lg bg-white dark:bg-neutral-800 dark:text-white");
+                    $(".dataTables_length label").addClass("dark:text-white");
+                    $(".dataTables_filter input").addClass("px-4 py-2 border rounded-lg bg-white dark:bg-neutral-800 dark:text-white");
+                    $(".dataTables_filter label").addClass("dark:text-white");
+                    $("dataTables_paginate").addClass("dark:text-white");
+                }
             });
         });
     </script>

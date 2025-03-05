@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="top-0 z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
+<nav x-data="{ open: false }" class="top-0 fixed w-screen z-50 transition duration-300 bg-white dark:bg-neutral-800 shadow-lg">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,7 +29,7 @@
                 </a>
             </div>
             <div class="flex-grow flex justify-center">
-                
+
             </div>
 
             <!-- Settings Dropdown or Login/Register Links -->
@@ -50,7 +50,11 @@
                             <div><?php echo e(Auth::user()->name); ?></div>
 
                             <div class="ms-2">
-                                <img class="h-8 w-8 rounded-full object-cover" src="https://www.w3schools.com/w3images/avatar1.png" alt="User Avatar">
+                                <?php if(auth()->user()->avatar): ?>
+                                <img class="h-10 w-10 rounded-full object-cover" src="<?php echo e(asset('storage/' . auth()->user()->avatar)); ?>" alt="User Avatar">
+                                <?php else: ?>
+                                <img class="h-10 w-10 rounded-full object-cover" src="<?php echo e(asset('storage/avatars/default-avatar.png')); ?>" alt="User Avatar">
+                                <?php endif; ?>
                             </div>
                         </button>
                      <?php $__env->endSlot(); ?>
@@ -176,7 +180,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-           
+
         </div>
 
         <!-- Responsive Settings Options -->

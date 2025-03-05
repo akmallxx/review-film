@@ -9,6 +9,7 @@ use App\Models\Casting;
 use App\Models\Film;
 use App\Models\Genre;
 use App\Models\Genre_relation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -23,8 +24,7 @@ class HomeController extends Controller
             $films = Film::query();
 
             if ($search) {
-                $films = $films->where('slug', 'like', '%' . $search . '%')
-                    ->orWhere('kategori_film', 'like', '%' . $search . '%');
+                $films = $films->where('slug', 'like', '%' . $search . '%');
             }
 
             if ($search_genre) {
@@ -196,7 +196,12 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $countComment = Comment::where('id_user', auth()->id())->where('id_film', $film->id)->count();
+        if (Auth::user() == null) {
+            $user = null;
+        } else {
+            $user = Auth::user()->id;
+        }
+        $countComment = Comment::where('id_user', $user)->where('id_film', $film->id)->count();
 
         // Ambil rating dari komentar tanpa rating dari role admin dan author
         $ratings = Comment::where('id_film', $film->id)
