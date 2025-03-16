@@ -17,8 +17,8 @@
         </div>
         
         <div class="mt-4">
-            {!! NoCaptcha::display() !!}
-            <x-input-error :messages="$errors->get('g-recaptcha-response')" class="mt-2" />
+            <div class="cf-turnstile" data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}"  data-theme="light"></div>
+            <x-input-error :messages="$errors->get('cf-turnstile-response')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
@@ -27,5 +27,5 @@
             </x-primary-button>
         </div>
     </form>
-    {!! NoCaptcha::renderJs() !!}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </x-guest-layout>

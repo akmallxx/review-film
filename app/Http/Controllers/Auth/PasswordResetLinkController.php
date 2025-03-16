@@ -27,7 +27,9 @@ class PasswordResetLinkController extends Controller
     {
         $request->validate([
             'email' => ['required', 'email'],
-            'g-recaptcha-response' => 'required|captcha',
+            'cf-turnstile-response' => 'required',
+        ], [
+            'cf-turnstile-response.required' => __('captcha diperlukan.'),
         ]);
 
         // We will send the password reset link to this user. Once we have attempted

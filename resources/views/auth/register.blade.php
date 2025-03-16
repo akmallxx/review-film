@@ -55,15 +55,4 @@
         </div>
     </form>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            setInterval(() => {
-                let turnstileResponse = document.querySelector('textarea[name="cf-turnstile-response"]');
-                if (turnstileResponse) {
-                    document.getElementById("cf-turnstile-response").value = turnstileResponse.value;
-                }
-            }, 500);
-        });
-    </script>
 </x-guest-layout>
