@@ -17,7 +17,7 @@
 <table id="myTable" class="min-w-full border dark:border-neutral-500 rounded-lg shadow-lg dark:text-white">
     <thead class="bg-neutral-300 dark:bg-neutral-600">
         <tr>
-            <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">id</th>
+            <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">#</th>
             <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">Judul</th>
             <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">Genre</th>
             <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">Aksi</th>
@@ -26,7 +26,7 @@
     <tbody>
         @foreach ($genre_relations as $judul => $gr)
         <tr class="border-b dark:border-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-600 transition duration-300">
-            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $gr->first()->id }}</td>
+            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $loop->iteration }}</td>
             <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $judul }}</td>
             <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">
                 {{ $gr->pluck('genre.title')->implode(', ') }}

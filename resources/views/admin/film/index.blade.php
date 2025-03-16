@@ -54,7 +54,7 @@
     <thead class="bg-neutral-300 dark:bg-neutral-600">
         <tr>
             <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">
-                ID</th>
+                #</th>
             <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">
                 KATEGORI</th>
             <th class="p-4 text-left font-bold text-sm uppercase tracking-wider text-neutral-700 dark:text-neutral-200">
@@ -73,7 +73,7 @@
         @foreach ($films as $film)
         <tr
             class="border-b dark:border-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-600 transition duration-300">
-            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $film->id }}
+            <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">{{ $loop->iteration }}
             </td>
             <td class="p-4 text-sm text-neutral-700 dark:text-neutral-100 border-b border-neutral-500">
                 {{ $film->kategori_film }}

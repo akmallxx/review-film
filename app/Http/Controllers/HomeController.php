@@ -42,11 +42,16 @@ class HomeController extends Controller
 
             return view('home', compact('films', 'search', 'search_genre', 'genres'));
         } else {
+            $populars = Film::withCount('comments')->orderByDesc('comments_count')->take(12)->get();
             $movies = Film::latest()->where('kategori_film', 'movies')->take(12)->get();
             $series = Film::latest()->where('kategori_film', 'series')->take(12)->get();
             $animes = Film::latest()->where('kategori_film', 'anime')->take(12)->get();
 
             // Menambahkan rating rata-rata ke setiap film
+            $populars->each(function ($popular) {
+                $popular->average_rating = $this->calculateAverageRating($popular->id);
+            });
+            
             $movies->each(function ($movie) {
                 $movie->average_rating = $this->calculateAverageRating($movie->id);
             });
@@ -188,7 +193,8 @@ class HomeController extends Controller
         $genres = Genre_relation::with('genre')
             ->where('id_film', $film->id)
             ->get()
-            ->pluck('genre'); // Ambil hanya data genre
+            ->sortBy(fn($item) => $item->genre->title)
+            ->pluck('genre');
 
         $castings = Casting::where('id_film', $film->id)->get();
 

@@ -87,11 +87,11 @@
                     <label for="kategori_umur" class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Kategori Umur</label>
                     <select name="kategori_umur" id="kategori_umur" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-neutral-600 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="" @php echo $id ? '' : 'selected'; @endphp disabled>Pilih Kategori</option>
-                        <option value="13+" {{ $film->kategori_umur == '13+' ? 'selected' : '' }}>13+</option>
-                        <option value="16+" {{ $film->kategori_umur == '16+' ? 'selected' : '' }}>16+</option>
-                        <option value="17+" {{ $film->kategori_umur == '17+' ? 'selected' : '' }}>17+</option>
-                        <option value="18+" {{ $film->kategori_umur == '18+' ? 'selected' : '' }}>18+</option>
-                        <option value="21+" {{ $film->kategori_umur == '21+' ? 'selected' : '' }}>21+</option>
+                        <option value="G" {{ $film->kategori_umur == 'G' ? 'selected' : '' }}>G (General Audience)</option>
+                        <option value="PG" {{ $film->kategori_umur == 'PG' ? 'selected' : '' }}>PG (Parental Guidance)</option>
+                        <option value="PG-13" {{ $film->kategori_umur == 'PG-13' ? 'selected' : '' }}>PG-13 (Parents Strongly Cautioned)</option>
+                        <option value="R" {{ $film->kategori_umur == 'R' ? 'selected' : '' }}>R (Restricted)</option>
+                        <option value="NC-17" {{ $film->kategori_umur == 'NC-17' ? 'selected' : '' }}>NC-17 (Adults Only)</option>
                     </select>
                 </div>
                 <div class="mb-5">

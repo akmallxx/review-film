@@ -1,3 +1,28 @@
+@section('meta-tag')
+<!-- Meta SEO -->
+<meta name="description" content="Website informasi detailtentang film movies, series, dan anime">
+<meta name="keywords" content="review film, tentang series, review anime">
+<meta name="author" content="yanto-film">
+
+<!-- Meta Open Graph / Facebook -->
+<meta property="og:type" content="video.movie">
+<meta property="og:title" content="{{ config('app.name', 'Laravel') }}">
+<meta property="og:description" content="Website informasi detail tentang film movies, series, dan anime">
+<meta property="og:image" content="{{ asset('images/logo/ambatron.jpg') }}">
+<meta property="og:image:width" content="630">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ config('app.name', 'Laravel') }}">
+<meta name="twitter:description" content="Website informasi detail tentang film movies, series, dan anime">
+<meta name="twitter:image" content="{{ asset('images/logo/ambatron.jpg') }}">
+<meta name="twitter:image:width" content="675">
+<meta name="twitter:image:height" content="675">
+@endsection
+
 <x-app-layout>
     <div class="py-6 max-w-7xl mx-auto">
         <div class="mx-auto py-6 px-4 sm:px-6 lg:px-0">
@@ -5,7 +30,7 @@
                 <div class="flex">
                     <!-- Dropdown Filter Genre -->
                     <div class="shrink-0">
-                        <select name="genre" class="ps-4 pe-10 py-3 text-black border-gray-300 bg-gray-100 rounded-s-md focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
+                        <select name="genre" class="ps-4 pe-4 py-3 text-black border-gray-300 bg-gray-100 rounded-s-md focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
                             <option value="" disable>Pilih Genre</option>
                             @foreach ($genres as $genre)
                             <option value="{{ $genre->slug }}"
@@ -39,7 +64,7 @@
         @else
         <div class="mx-auto px-4 sm:px-6 lg:px-0">
             <div class="flex justify-between border-l-4 border-red-600">
-                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN</h2>
+                <h2 class="ms-2 text-black dark:text-white font-semibold text-lg md:text-xl">HASIL PENCARIAN UNTUK: {{ $search }}</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6 mt-8">
                 @foreach($films as $film)
@@ -47,13 +72,13 @@
                     <a href="{{ route('film.detail', $film->slug) }}" class="block">
                         <div class="w-full relative">
                             <!-- Badge Total Rating -->
-                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                            <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                 ⭐ {{ number_format($film->average_rating, 1) }}
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
-                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                            <div class="relative w-full overflow-hidden rounded">
+                                <img class="w-full h-72 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy"
                                     src="{{ $film->poster_url }}"
                                     alt="{{ $film->judul }}" />
                                 <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
@@ -91,13 +116,13 @@
                         <a href="{{ route('film.detail', $movie->slug) }}" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                     ⭐ {{ number_format($movie->average_rating, 1) }}
                                 </div>
 
                                 <!-- Poster dengan efek hover -->
-                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
-                                    <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                <div class="relative w-full overflow-hidden rounded">
+                                    <img class="w-full h-72 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy"
                                         src="{{ $movie->poster_url }}"
                                         alt="{{ $movie->judul }}" />
                                     <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
@@ -136,13 +161,13 @@
                         <a href="{{ route('film.detail', $serie->slug) }}" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                     ⭐ {{ number_format($serie->average_rating, 1) }}
                                 </div>
 
                                 <!-- Poster dengan efek hover -->
-                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
-                                    <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                <div class="relative w-full overflow-hidden rounded">
+                                    <img class="w-full h-72 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy"
                                         src="{{ $serie->poster_url }}"
                                         alt="{{ $serie->judul }}" />
                                     <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
@@ -182,13 +207,13 @@
                         <a href="{{ route('film.detail', $anime->slug) }}" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                     ⭐ {{ number_format($anime->average_rating, 1) }}
                                 </div>
 
                                 <!-- Poster dengan efek hover -->
-                                <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
-                                    <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                <div class="relative w-full overflow-hidden rounded">
+                                    <img class="w-full h-72 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy"
                                         src="{{ $anime->poster_url }}"
                                         alt="{{ $anime->judul }}" />
                                     <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
@@ -214,40 +239,17 @@
         <!-- End anime Page -->
         @endif
     </div>
+    <script>
+        document.addEventListener("contextmenu", function(event) {
+            let target = event.target;
+            if (target.tagName === "IMG") {
+                event.preventDefault(); // Blokir menu default
+            }
+        });
+    </script>
 </x-app-layout>
 
 @section('css-content')
-<style>
-    .swiper {
-        width: 100%;
-        height: 100%;
-    }
-
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .swiper-slide img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-</style>
 @endsection
 
 @section('script-content')
-<script>
-    var swiper = new Swiper(".mySwiper", {
-        pagination: {
-            el: ".swiper-pagination",
-            dynamicBullets: true,
-        },
-    });
-</script>
-@endsection
