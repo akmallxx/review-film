@@ -1,4 +1,12 @@
-pertama import `review_film.sql` , karena migration belum menyesuaikan dengan struktur database yang baru
+pertama import `review_film.sql` , karena migration belum menyesuaikan dengan struktur database yang baru, atau bisa langsung ke website [Review Film](https://review-film.akmalazahwa.my.id/)
+
+## Akun Demo
+#### Admin
+`> admin@g.co`<br/>
+`> demo123@#$`
+#### Author
+`> author@example.com`<br/>
+`> demo123@#$`
 
 ## Install package
 ```sh
