@@ -13,6 +13,16 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <script>
+        // Cek apakah user punya preferensi di localStorage
+        if (localStorage.getItem("theme") === "light") {
+            document.documentElement.classList.remove("dark"); // Pakai light mode jika sudah dipilih sebelumnya
+        } else {
+            document.documentElement.classList.add("dark"); // Default ke dark mode
+            localStorage.setItem("theme", "dark"); // Simpan preferensi default ke dark
+        }
+    </script>
     </head>
     <body class="font-sans text-neutral-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-neutral-100 dark:bg-neutral-900">
@@ -26,5 +36,7 @@
                 {{ $slot }}
             </div>
         </div>
+        
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     </body>
 </html>

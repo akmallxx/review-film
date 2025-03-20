@@ -31,6 +31,18 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script>
+        // Cek apakah user punya preferensi di localStorage
+        if (localStorage.getItem("theme") === "light") {
+            document.documentElement.classList.remove("dark"); // Pakai light mode jika sudah dipilih sebelumnya
+        } else {
+            document.documentElement.classList.add("dark"); // Default ke dark mode
+            localStorage.setItem("theme", "dark"); // Simpan preferensi default ke dark
+        }
+    </script>
+
+    @yield('styles')
 </head>
 
 <body class="bg-neutral-200 dark:bg-neutral-950">
@@ -39,7 +51,7 @@
         @include('layouts.admin.sidebar')
         <div class="flex-1 flex flex-col">
             <main class="p-6">
-                <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md ms-64 mt-16">
+                <div class="bg-neutral-100 dark:bg-neutral-900 p-6 rounded shadow-md ms-64 mt-16">
                     @yield('content')
                 </div>
             </main>
@@ -60,18 +72,28 @@
         src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
     @if(session('success'))
-        <script>
-            Swal.fire({
-                title: 'Success!',
-                text: "{!! session('success') !!}",
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: "{!! session('success') !!}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: "{!! session('error') !!}",
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
     @endif
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#myTable').DataTable({
                 "pagingType": "simple",
                 "responsive": true,
@@ -90,7 +112,7 @@
                     },
                 },
                 "dom": '<"flex justify-between items-center mb-4"lf>t<"flex justify-between items-center mt-4"ip>',
-                "initComplete": function () {
+                "initComplete": function() {
                     $(".dataTables_length select").addClass("px-4 py-2 border rounded-lg bg-white dark:bg-neutral-800 dark:text-white");
                     $(".dataTables_length select option").addClass("px-4 py-2 border rounded-lg bg-white dark:bg-neutral-800 dark:text-white");
                     $(".dataTables_length label").addClass("dark:text-white");
@@ -102,5 +124,34 @@
         });
     </script>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+        const htmlElement = document.documentElement;
 
+        // Atur default ke dark mode jika tidak ada di localStorage
+        if (localStorage.getItem("theme") === "light") {
+            htmlElement.classList.remove("dark");
+            themeIcon.classList.replace("bi-moon-fill", "bi-brightness-high-fill");
+        } else {
+            htmlElement.classList.add("dark");
+            themeIcon.classList.replace("bi-brightness-high-fill", "bi-moon-fill");
+            localStorage.setItem("theme", "dark");
+        }
+
+        // Ganti tema saat tombol diklik
+        themeToggle.addEventListener("click", function() {
+            if (htmlElement.classList.contains("dark")) {
+                htmlElement.classList.remove("dark");
+                themeIcon.classList.replace("bi-moon-fill", "bi-brightness-high-fill");
+                localStorage.setItem("theme", "light");
+            } else {
+                htmlElement.classList.add("dark");
+                themeIcon.classList.replace("bi-brightness-high-fill", "bi-moon-fill");
+                localStorage.setItem("theme", "dark");
+            }
+        });
+    });
+</script>
 </html>

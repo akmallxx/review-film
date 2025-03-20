@@ -14,7 +14,10 @@ class GenreRelationsController extends Controller
     {
         $genre_relations = Genre_relation::with(['film', 'genre'])
             ->get()
-            ->groupBy('film.judul');
+            ->groupBy('film.judul')
+            ->map(function ($films) {
+                return $films->sortBy(fn($item) => $item->genre->title);
+            });
 
         $genres = Genre::all();
         $films = Film::all();
@@ -24,9 +27,19 @@ class GenreRelationsController extends Controller
 
     public function create($film = null)
     {
-        $genres = Genre::all();
+        $genres = Genre::orderBy('title', 'asc')->get();
         $filmList = Film::all();
         return view('admin.genre-relations.create', compact('genres', 'filmList'));
+    }
+
+    public function edit($id)
+    {
+        $film = Film::findOrFail($id);
+        $filmList = Film::all();
+        $genres = Genre::orderBy('title', 'asc')->get();
+        $selectedGenres = $film->genres->pluck('id')->toArray();
+
+        return view('admin.genre-relations.create', compact('film', 'filmList', 'genres', 'selectedGenres'));
     }
 
     public function store(Request $request)
@@ -48,16 +61,6 @@ class GenreRelationsController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect()->route('admin.genre-relations')->with('success', 'Genre berhasil ditambahkan!');
-    }
-
-    public function edit($id)
-    {
-        $film = Film::findOrFail($id);
-        $filmList = Film::all();
-        $genres = Genre::all();
-        $selectedGenres = $film->genres->pluck('id')->toArray();
-
-        return view('admin.genre-relations.create', compact('film', 'filmList', 'genres', 'selectedGenres'));
     }
 
     public function update(Request $request, $id)

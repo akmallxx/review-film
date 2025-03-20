@@ -3,7 +3,7 @@
 @section('title', 'CRUD Genre')
 
 @section('content')
-<h2 class="text-3xl font-bold text-neutral-900 dark:text-white mb-8">Edit Genre</h2>
+<h2 class="text-3xl font-bold text-neutral-900 dark:text-white mb-8">Edit Castings</h2>
 <div class="p-4 md:p-5 space-y-4">
     @php
     if (isset($id)) {

@@ -3,11 +3,11 @@
 
     <div class="py-6 max-w-7xl mx-auto">
         <div class="mx-auto py-6 px-4 sm:px-6 lg:px-0">
-            <form action="{{ route('home') }}" method="GET" class="mb-8">
+            <form action="{{ route('series') }}" method="GET" class="mb-8">
                 <div class="flex">
                     <!-- Dropdown Filter Genre -->
                     <div class="shrink-0">
-                        <select name="genre" class="ps-4 pe-10 py-3 text-black border-gray-300 bg-gray-100 rounded-s-md focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
+                        <select name="genre" class="ps-4 pe-4 py-3 text-black border-gray-300 bg-gray-100 rounded-s-md focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
                             <option value="" disable>Pilih Genre</option>
                             @foreach ($genres as $genre)
                             <option value="{{ $genre->slug }}"
@@ -49,13 +49,13 @@
                     <a href="{{ route('film.detail', $film->slug) }}" class="block">
                         <div class="w-full relative">
                             <!-- Badge Total Rating -->
-                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                            <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                 ⭐ {{ number_format($film->average_rating, 1) }}
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
-                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                            <div class="relative w-full overflow-hidden rounded">
+                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                                     src="{{ $film->poster_url }}"
                                     alt="{{ $film->judul }}" />
                                 <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
@@ -89,13 +89,13 @@
                     <a href="{{ route('film.detail', $serie->slug) }}" class="block">
                         <div class="w-full relative">
                             <!-- Badge Total Rating -->
-                            <div class="absolute top-2 left-2 bg-red-900 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                            <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
                                 ⭐ {{ number_format($serie->average_rating, 1) }}
                             </div>
 
                             <!-- Poster dengan efek hover -->
-                            <div class="relative w-full aspect-[3/4] overflow-hidden rounded">
-                                <img class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                            <div class="relative w-full overflow-hidden rounded">
+                                <img class="w-full h-72 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy"
                                     src="{{ $serie->poster_url }}"
                                     alt="{{ $serie->judul }}" />
                                 <div class="absolute inset-0 bg-black bg-opacity-0 transition-all duration-500 ease-out group-hover:bg-opacity-40"></div>
@@ -125,5 +125,13 @@
         @endif
     </div>
 
-
+    <script>
+        document.addEventListener("contextmenu", function (event) {
+            let target = event.target;
+            if (target.tagName === "IMG") {
+                event.preventDefault(); // Blokir menu default
+                alert("Klik kanan diizinkan, tetapi opsi gambar dinonaktifkan.");
+            }
+        });
+    </script>
 </x-app-layout>

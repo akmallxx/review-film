@@ -27,10 +27,5 @@
             </x-sidebar-link>
         </li>
         @endcan
-        <li class="mb-2">
-            <x-sidebar-link href="{{ route('admin.genre-relations') }}" :active="request()->routeIs('admin.genre-relations')">
-                <i class="bi bi-diagram-3 me-2"></i>Genre Relation
-            </x-sidebar-link>
-        </li>
     </ul>
 </aside>

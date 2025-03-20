@@ -1,9 +1,39 @@
 @section('title', $film->judul . ' - ' . config('app.name', 'Laravel'))
 
+@section('meta-tag')
+<!-- Meta SEO -->
+<meta name="description" content="{{ Str::limit($film->deskripsi, 160, '...') }}">
+<meta name="keywords" content="{{ $film->judul }}, {{ implode(', ', $genres->pluck('title')->toArray()) }}, {{ $film->kategori_film }}, {{ $film->kategori_umur }}, Film {{ $film->tahun_rilis }}">
+<meta name="author" content="{{ $film->pencipta }}">
+
+<!-- Meta Open Graph / Facebook -->
+<meta property="og:type" content="video.movie">
+<meta property="og:title" content="{{ $film->judul }} - {{ config('app.name', 'Laravel') }}">
+<meta property="og:description" content="{{ Str::limit($film->deskripsi, 120, '...') }}">
+<meta property="og:image" content="{{ $film->poster_url }}">
+<meta property="og:image:width" content="630">
+<meta property="og:image:height" content="1200">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $film->judul }} - {{ config('app.name', 'Laravel') }}">
+<meta name="twitter:description" content="{{ Str::limit($film->deskripsi, 120, '...') }}">
+<meta name="twitter:image" content="{{ $film->poster_url }}">
+<meta name="twitter:image:width" content="1200">
+<meta name="twitter:image:height" content="675">
+@endsection
+
+
 @section('css-content')
 <!-- Fancybox CSS & JS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 <style>
+    * {
+        scroll-behavior: smooth;
+    }
+
     .hidden-form {
         display: none;
     }
@@ -11,37 +41,34 @@
 @endsection
 
 <x-app-layout>
-    <div class="relative pb-36 sm:py-24 mb-12">
+    <div class="relative pb-16 pt-16 sm:py-36 mb-12 -mt-20">
         <!-- Background Image with Blur and Dark Overlay -->
         <div class="absolute inset-0 bg-cover bg-center blur-lg dark:brightness-50 h-full"
             style="background-image: url('{{ $film->poster_url }}');">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100 dark:to-neutral-900 opacity-80"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-400 dark:to-neutral-900 opacity-80"></div>
         </div>
 
         <div class="relative max-w-7xl mx-auto lg:px-8 h-full">
             <div class="overflow-hidden sm:rounded-lg p-6">
-                <div class="m-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-                    <div class="p-4">
-                        <img class="w-full h-auto aspect-[3/4] object-cover transition-transform duration-300 rounded-xl"
-                            src="{{ $film->poster_url }}" alt="{{ $film->judul }}" />
+                <div class="my-10 mx-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
+                    <div class="p-4 flex justify-center">
+                        <img src="{{ $film->poster_url }}" alt="{{ $film->judul }}"
+                            class="w-full max-w-xs sm:max-w-sm h-auto rounded-xl object-cover" />
                     </div>
                     <div class="col-span-2 sm:col-span-1 lg:col-span-2">
-                        <h2 class="text-lg font-semibold tracking-tight text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl mb-2">
-                            {{ $film->judul }} <span class="text-md">({{ $film->tahun_rilis }})</span>
+                        <h2 class="font-bold tracking-tight text-neutral-900 dark:text-white text-xl lg:text-3xl mb-2">
+                            {{ $film->judul }}
                         </h2>
-                        <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 flex items-center mb-8">
-                            <i class="bi bi-camera-reels-fill mr-2"></i> By <span class="font-bold ms-1">{{ $film->pencipta }}</span>
+                        <p class="text-neutral-900 dark:text-neutral-300 font-semibold mb-0.5">
+                            {{ ucfirst($film->kategori_film) }} <span class="mx-0.5">·</span> {{ ucfirst($film->kategori_umur) }} <span class="mx-1">·</span> {{ $film->tahun_rilis }}
+                        </p>
+                        <p class="text-neutral-900 dark:text-neutral-300 font-semibold mb-6">
+                            By {{ $film->pencipta }}
                         </p>
 
                         <div class="flex flex-wrap items-center gap-2 ">
-                            <span class="bg-red-700 text-white text-sm font-medium px-2.5 py-1 rounded-full shadow-md">
-                                {{ ucfirst($film->kategori_film) }}
-                            </span>
-                            <span class="bg-orange-700 text-white text-sm font-medium px-2.5 py-1 rounded-full shadow-md">
-                                {{ ucfirst($film->kategori_umur) }}
-                            </span>
                             @foreach ($genres as $genre)
-                            <span class="bg-blue-800 text-white text-sm font-medium px-2.5 py-1 rounded-full shadow-md">
+                            <span class="text-neutral-900 dark:text-white text-sm font-medium px-2.5 py-1 rounded-full border border-neutral-800 dark:border-neutral-400">
                                 {{ $genre->title }}
                             </span>
                             @endforeach
@@ -52,7 +79,7 @@
                                 {{ \Illuminate\Support\Str::words($film->deskripsi, 50, '...') }}
 
                                 @if(\Illuminate\Support\Str::wordCount($film->deskripsi) > 50)
-                                <button @click="open = true" class="text-white font-semibold hover:underline">
+                                <button @click="open = true" class="dark:text-white font-semibold hover:underline">
                                     Lihat Selengkapnya
                                 </button>
                                 @endif
@@ -72,18 +99,23 @@
                             </div>
                         </div>
 
+                        <div class="flex items-center gap-2">
+                            <a data-fancybox href="{{ $film->trailer }}"
+                                class="flex items-center text-neutral-100 hover:text-neutral-300 rounded-lg text-sm transition duration-200">
+                                <div class="p-2.5 rounded-full transition-transform border border-neutral-400 me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </div>
+                                WATCH TRAILER
+                            </a>
+    
+                            <span class="me-2 ms-3 text-neutral-500 text-2xl">|</span>
+                            <span class="dark:text-neutral-400 text-md">
+                                {{ $film->kategori_film !== 'movies' ? $film->total_episode . " Episodes" : $film->durasi_format }}
+                            </span>
+                        </div>
 
-
-
-                        <a data-fancybox href="{{ $film->trailer }}"
-                            class="text-red-600 hover:text-white border border-red-600 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5">
-                            <i class="bi bi-play-circle"></i> Watch Trailer
-                        </a>
-
-                        <span class="me-2 ms-3 text-neutral-500 text-2xl">|</span>
-                        <span class="dark:text-neutral-400 text-md">
-                            {{ $film->kategori_film !== 'movies' ? $film->total_episode . " Episodes" : $film->durasi_format }}
-                        </span>
                         <div class="flex flex-wrap items-center mt-6">
                             <p class="flex text-lg md:text-xl drop-shadow-md">
                                 @for ($i = 1; $i <= 5; $i++)
@@ -116,12 +148,12 @@
             <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="max-w-full mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg p-8">
-                        <p class="text-black dark:text-white text-2xl font-semibold mb-6">Castings</p>
+                        <p class="text-neutral-900 dark:text-white text-2xl font-semibold mb-6">Castings</p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             @foreach ($castings as $casting)
                             <div class="bg-neutral-200 dark:bg-neutral-700 p-4 rounded-lg shadow">
-                                <p class="text-black dark:text-white font-medium">{{ $casting->nama_asli }}</p>
+                                <p class="text-neutral-900 dark:text-white font-medium">{{ $casting->nama_asli }}</p>
                                 <p class="text-neutral-600 dark:text-neutral-300 text-sm">{{ $casting->nama_panggung }}</p>
                             </div>
                             @endforeach
@@ -133,22 +165,21 @@
     </div>
     @endif
 
-    <div class="pb-12">
+    <div class="pb-12" id="komentar">
         <div class="max-w-7xl mx-auto lg:px-8">
             <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="max-w-full mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg p-8">
-                        <p class="text-black dark:text-white text-2xl font-semibold mb-6">Komentar</p>
 
                         @if ($countComment < 1)
                             <div class="mt-8 pb-8 border-b relative">
                             @guest
                             <!-- Overlay Blur -->
-                            <div class="absolute inset-0 bg-neutral-800/10 backdrop-blur-sm z-10 rounded-lg"></div>
+                            <div class="absolute inset-0 dark:bg-neutral-800/10 backdrop-blur-sm z-10 rounded-lg"></div>
 
                             <!-- Teks peringatan di atas blur -->
                             <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
-                                <h2 class="text-neutral-200 font-semibold text-md leading-tight">
+                                <h2 class="dark:text-neutral-200 font-semibold text-md leading-tight">
                                     Harap <a href="{{ route('login') }}" class="text-red-500 hover:underline font-bold">LOGIN</a> atau
                                     <a href="{{ route('register') }}" class="text-red-500 hover:underline font-bold">REGISTRASI</a>
                                     terlebih dahulu untuk mengirim komentar.
@@ -197,9 +228,9 @@
                                 <div class="flex flex-wrap items-start space-x-2 md:space-x-4 w-full relative rounded-md p-4">
                                     <div class="flex-shrink-0">
                                         @if( Auth::user()->avatar)
-                                        <img class="md:h-12 md:w-12 h-7 w-7 mt-2 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="User Avatar">
+                                        <img class="md:h-12 md:w-12 h-10 w-10 mt-2 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="User Avatar">
                                         @else
-                                        <img class="md:h-9 md:w-9 h-7 w-7 mt-2 rounded-full object-cover" src="{{ asset('storage/avatars/default-avatar.png') }}" alt="User Avatar">
+                                        <img class="md:h-12 md:w-12 h-10 w-10 mt-2 rounded-full object-cover" src="{{ asset('storage/avatars/default-avatar.png') }}" alt="User Avatar">
                                         @endif
                                     </div>
                                     <div class="flex-1 bg-white dark:bg-neutral-800 rounded-lg shadow-sm relative z-10">
@@ -234,8 +265,11 @@
 
 
                     <div class="space-y-4 mt-8">
+                        <div class="flex justify-between">
+                            <p class="text-neutral-900 dark:text-white text-2xl font-semibold mb-2">Komentar</p>
+                        </div>
                         @foreach ($comment as $c)
-                        <div id="komentar-{{ $c->user->name }}" class="flex flex-wrap items-start space-x-2 md:space-x-4 w-full relative bg-neutral-200 dark:bg-neutral-700 rounded-md p-4" id="comment-{{ $c->id }}">
+                        <div id="komentar-{{ $c->user->id }}" class="flex flex-wrap items-start space-x-2 md:space-x-4 w-full relative bg-neutral-200 dark:bg-neutral-700 rounded-md p-4" id="comment-{{ $c->id }}">
                             <div class="flex-shrink-0">
                                 @if($c->user->avatar)
                                 <img class="md:h-9 md:w-9 h-7 w-7 mt-1 rounded-full object-cover" src="{{ asset('storage/' . $c->user->avatar) }}" alt="User Avatar">
@@ -244,7 +278,7 @@
                                 @endif
                             </div>
                             <div class="flex-1 w-full">
-                                <div class="flex items-center text-black dark:text-white font-semibold mb-1">
+                                <div class="flex items-center text-neutral-900 dark:text-white font-semibold mb-1">
                                     <span class="text-sm md:text-lg font-semibold">{{ $c->user->name }}</span>
                                     @if ($c->user->hasRole('admin'))
                                     <span class="text-xs md:text-sm text-red-500 font-semibold ms-2">(Admin)</span>
@@ -432,5 +466,13 @@
                 rating.classList.remove('hidden-form');
             }
         }
+    </script>
+
+    <script>
+    document.addEventListener("contextmenu", function (e) {
+        if (e.target.tagName === "IMG") {
+            e.preventDefault();
+        }
+    });
     </script>
 </x-app-layout>

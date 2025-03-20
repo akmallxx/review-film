@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\GenreRelationsController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 
 Route::get('/', function () {
     return redirect()->to('/home');
@@ -26,7 +27,7 @@ Route::get('/anime', [HomeController::class, 'animes'])->name('anime');
 
 Route::get('/detail/{slug}', [HomeController::class, 'show'])->name('film.detail');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', EnsureEmailIsVerified::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

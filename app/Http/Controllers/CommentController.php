@@ -17,7 +17,7 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return redirect()->back()->with('success', 'Comment deleted successfully!');
+        return redirect()->back()->with('success', 'Comment deleted successfully!')->withFragment('komentar');
     }
 
 
@@ -36,7 +36,7 @@ class CommentController extends Controller
             'id_user' => Auth::id(),
         ]);
 
-        return back()->with('success', 'Komentar dan rating berhasil dikirim!');
+        return back()->with('success', 'Komentar dan rating berhasil dikirim!')->withFragment('komentar');
     }
 
     public function update(Request $request, Comment $comment)
@@ -54,6 +54,6 @@ class CommentController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return back()->with('success', 'Komentar berhasil diperbarui.');
+        return back()->with('success', 'Komentar berhasil diperbarui.')->withFragment('komentar');
     }
 }
