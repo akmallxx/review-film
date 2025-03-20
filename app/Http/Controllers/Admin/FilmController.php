@@ -52,8 +52,6 @@ class FilmController extends Controller
 
     public function store(Request $request)
     {
-
-        dd($request->all());
         try {
             $request->validate([
                 'judul' => 'required|string|max:255',
