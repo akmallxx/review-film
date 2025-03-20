@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 16, 2025 at 08:35 PM
+-- Generation Time: Mar 20, 2025 at 03:04 PM
 -- Server version: 10.6.21-MariaDB-cll-lve
--- PHP Version: 8.3.15
+-- PHP Version: 8.3.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,6 +54,8 @@ INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 ('9e6a55b6b4563e652a23be9d623ca5055c356940:timer', 'i:1741743019;', 1741743019),
 ('admin@example.com|180.254.99.214', 'i:1;', 1741356853),
 ('admin@example.com|180.254.99.214:timer', 'i:1741356853;', 1741356853),
+('asdasdadsss@example.com|162.158.186.46', 'i:1;', 1742148761),
+('asdasdadsss@example.com|162.158.186.46:timer', 'i:1742148761;', 1742148761),
 ('b3f0c7f6bb763af1be91d9e74eabfeb199dc1f1f', 'i:1;', 1741743955),
 ('b3f0c7f6bb763af1be91d9e74eabfeb199dc1f1f:timer', 'i:1741743955;', 1741743955),
 ('d435a6cdd786300dff204ee7c2ef942d3e9034e2:timer', 'i:1742081663;', 1742081663),
@@ -69,7 +71,7 @@ INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 ('luqmanasyari684@gmail.com|172.69.165.8:timer', 'i:1742081367;', 1742081367),
 ('rafan7750@gmail.com|103.210.35.90', 'i:2;', 1741673710),
 ('rafan7750@gmail.com|103.210.35.90:timer', 'i:1741673710;', 1741673710),
-('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:2:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"crud admin\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:11:\"crud author\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:2;i:1;i:3;}}}s:5:\"roles\";a:2:{i:0;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:5:\"admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:6:\"author\";s:1:\"c\";s:3:\"web\";}}}', 1742166349);
+('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:2:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"crud admin\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:11:\"crud author\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:2;i:1;i:3;}}}s:5:\"roles\";a:2:{i:0;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:5:\"admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:6:\"author\";s:1:\"c\";s:3:\"web\";}}}', 1742529756);
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,11 @@ INSERT INTO `castings` (`id`, `nama_panggung`, `nama_asli`, `id_film`, `created_
 (18, 'Sung Jinwoo', 'Kanip Icikiwir', 17, '2025-03-08 02:48:03', '2025-03-08 02:48:03'),
 (19, 'Cha Hae-In', 'Rosé', 17, '2025-03-08 02:50:15', '2025-03-08 02:53:50'),
 (20, 'Thomas Andre', 'Fadil Sabana', 17, '2025-03-08 02:52:12', '2025-03-08 02:52:12'),
-(21, 'Liu Zhigang', 'Jenny Rengginang', 17, '2025-03-08 02:53:39', '2025-03-08 02:53:39');
+(21, 'Liu Zhigang', 'Jenny Rengginang', 17, '2025-03-08 02:53:39', '2025-03-08 02:53:39'),
+(22, 'LetDa Hypler', 'Kanip Kroco', 21, '2025-03-20 04:06:25', '2025-03-20 04:06:25'),
+(23, 'Budi02', 'Rapa Poke', 21, '2025-03-20 04:06:43', '2025-03-20 04:06:43'),
+(24, 'RUOK', 'Akmal GG', 21, '2025-03-20 04:07:02', '2025-03-20 04:07:49'),
+(25, 'Frontal Gaymink', 'Nanda HADIBOT', 21, '2025-03-20 04:07:38', '2025-03-20 04:07:38');
 
 -- --------------------------------------------------------
 
@@ -145,15 +151,6 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `comment`, `rating`, `id_user`, `id_film`, `created_at`, `updated_at`) VALUES
-(1, 'Lorem ipsum dolor sit amet consectetur adipisicing\r\n                                        elit. Accusamus suscipit ad eligendi quaerat numquam deleniti, tempora fuga\r\n                                        veritatis dolorum architecto maiores, consequatur debitis deserunt laborum\r\n                                        totam iusto corrupti, quae soluta. Accusantium molestias ducimus illum\r\n                                        exercitationem quos eum eaque doloribus ipsum nam asperiores distinctio\r\n                                        aliquid ullam est, accusamus natus, qui illo.', '3', 4, 1, '2025-02-14 12:52:31', '2025-02-14 12:52:31'),
-(8, 'keren wak', '4', 4, 5, '2025-02-14 21:59:49', '2025-02-14 21:59:49'),
-(14, 'mantap asli', '4', 8, 14, '2025-03-07 12:26:35', '2025-03-07 12:26:35'),
-(15, 'bole bole', '3', 11, 14, '2025-03-07 12:28:30', '2025-03-07 12:28:30'),
-(16, 'mang iya', '4', 11, 12, '2025-03-07 12:28:47', '2025-03-07 12:28:47'),
-(17, 'BADASS', '5', 11, 17, '2025-03-07 12:30:01', '2025-03-07 12:30:01'),
-(18, 'WIDIIHHHH', '5', 11, 5, '2025-03-07 12:30:24', '2025-03-07 12:30:24'),
-(25, 'test', '4', 16, 14, '2025-03-09 21:16:31', '2025-03-09 21:16:31'),
-(33, 'test', '4', 17, 14, '2025-03-11 18:57:39', '2025-03-11 18:59:24'),
 (34, 'قَدْ جَاءَكُمْ رَمَضَانُ شَهْرٌمُبَارَكٌ افْتَرَضَ اللهُ عَلَيْكُمْ صِيَامَهُ تُفْتَحُ فَيْهِ أبْوَابُ الْجَنَّةِ وَيُغْلَقُ فَيْهِ أبْوَابُ الْجَحِيْمِ وَتُغَلًّ فَيْهَ الشَّيَاطَيْنُ فَيْهِ لَيْلَةٌ خَيْرٌ مِنْ ألْفِ شَهْرٍ \r\n\r\nArtinya: Telah datang bulan Ramadhan, bulan penuh berkah, maka Allah mewajibkan kalian untuk berpuasa pada bulan itu. Saat itu pintu-pintu surga dibuka, pintu-pintu neraka ditutup, para setan diikat dan pada bulan itu pula terdapat satu malam yang nilainya lebih baik dari seribu bulan (HR Ahmad).', '5', 24, 11, '2025-03-15 17:16:47', '2025-03-15 17:16:47');
 
 -- --------------------------------------------------------
@@ -218,7 +215,9 @@ INSERT INTO `films` (`id`, `judul`, `slug`, `poster`, `deskripsi`, `kategori_fil
 (15, 'TWINKLING WATERMELON', 'twinkling-watermelon-2023', 'https://upload.wikimedia.org/wikipedia/id/thumb/5/52/Twinkling_Watermelon.jpg/250px-Twinkling_Watermelon.jpg', 'Twinkling Watermelon mengisahkan tentang Eun Gyeol, seorang siswa sekolah menengah yang tampaknya biasa-biasa saja, menjalani kehidupan ganda secara rahasia. Pada siang hari, dia menjadi murid teladan, namun pada malam hari, dia menjadi gitaris untuk sebuah band di Hongdae. Tanpa diduga, dia melakukan perjalanan kembali ke masa lalu dan bertemu Yi Chan. Bersama-sama, mereka membentuk band bernama Watermelon Sugar dan menjalin ikatan yang mendalam.', 'series', '2023', 65, 'Studio Dragon', 'https://youtu.be/KbWi3VW6QuM', 'R', 16, 3, '2025-02-18 05:34:13', '2025-02-18 05:34:13'),
 (16, 'SOLO LEVELING', 'solo-leveling-2024', 'https://images.justwatch.com/poster/310154566/s718/season-1.jpg', '10 tahun yang lalu, sebuah gerbang yang menghubungkan dunia manusia dengan alam yang berisi sihir dan monster tiba-tiba muncul dan disebut dengan nama \"Gate\". Untuk mengalahkan monster-monster ganas ini, manusia biasa yang menerima kekuatan super dikenal sebagai \"Hunters\" akan masuk ke Gerbang dan mengalahkannya. Sung Jin Woo adalah salah satu dari Hunters yang dikenal sebegai \"Terlemah\" dikarenakan kemampuannya yang hampir tidak ada. Tetapi dia tetap bersusah payah masuk ke Gate untuk membayar tagihan rumah sakit ibunya.\r\nKehidupan menyedihkan Sung Jin Woo berubah setelah dia menjadi satu-satunya yang selamat dari misi dan membuka matanya tiga hari kemudian dengan sebuah layar misterius muncul di depan wajahnya. \"Daftar Misi\" menuntut Jin Woo untuk menyelesaikan program pelatihan intens dan tidak realistik dengan hukuman jika tidak dilakukan. Dengan enggan dia melakukannya tanpa menyadari bahwa sebentar lagi dia akan menjadi salah satu Hunter paling menakutkan di dunia.', 'anime', '2024', 24, 'Jang Sung-rak (DUBU)', 'https://youtu.be/YvGSK8mIlt8', 'R', 12, 3, '2025-03-07 07:07:54', '2025-03-09 07:30:23'),
 (17, 'SOLO LEVELING: REAWAKENING', 'solo-leveling-reawakening-2025', 'https://m.media-amazon.com/images/M/MV5BY2ZlZWM2M2UtYzAyNC00MTlmLThlMzUtNWIwMjZlODIwYzczXkEyXkFqcGc@._V1_.jpg', 'Berlatar di sebuah lorong yang menghubungkan dimensi lain dan dunia ini, \"Gate\",\r\nsekaligus dunia tempat orang-orang dengan kemampuan khusus bernama \"Hunter\" hidup.\r\nHunter berperingkat rendah yang dikenal \"Senjata Terlemah Umat Manusia\",\r\nSung Jinwoo tiba-tiba saja mendapatkan kekuatan untuk \"meningkatkan level\" yang hanya dimilikinya.', 'anime', '2025', 24, 'Jang Sung-rak (DUBU)', 'https://youtu.be/byJ7pxxhaDY', 'R', 13, 12, '2025-03-07 07:17:44', '2025-03-09 23:24:15'),
-(18, 'SAKAMOTO DAYS', 'sakamoto-days-2025', 'https://cdn.myanimelist.net/images/anime/1733/147417l.jpg', 'Nama Tarou Sakamoto pernah menebarkan rasa takut pada setiap penjahat. Tidak ada pembunuh bayaran profesional lain yang menandingi kehebatannya, dan sesama pembunuh memujanya. Namun, Sakamoto jatuh cinta. Dalam lima tahun yang singkat, ia menikah, menjadi seorang ayah, menambah berat badan, dan menukar senjatanya dengan celemek saat ia menjadi pemilik sebuah toko serba ada yang sederhana.\r\n\r\nMeskipun Sakamoto sudah benar-benar pensiun, ia merasa kehidupan kriminalnya yang lama sulit untuk dilepaskan. Mantan rekannya, Shin Asakura, muncul kembali dan memutuskan untuk tinggal bersama keluarga Sakamoto di bawah aturan ketat mereka yang melarang pembunuhan. Lebih buruk lagi, hadiah besar diberikan untuk kepala Sakamoto. Banyak pembunuh sekarang mengejarnya—tetapi mereka akan mendapatkan kejutan. Sakamoto belum kehilangan keunggulannya, dan tidak peduli trik apa pun yang dilakukan musuh-musuhnya, ia akan melawan setiap musuh untuk melindungi keluarganya yang tersayang.', 'anime', '2025', 24, 'Yuto Suzuki', 'https://youtu.be/9TbmxbckSjE?si=bCC16HS9P5RF58it', 'PG-13', 11, 12, '2025-03-07 07:23:14', '2025-03-15 06:46:30');
+(18, 'SAKAMOTO DAYS', 'sakamoto-days-2025', 'https://m.media-amazon.com/images/M/MV5BM2MwZDRmYWItNGIzZC00ZWExLWEwNWYtNmM1ZmU3OTA3NmY4XkEyXkFqcGc@._V1_.jpg', 'Nama Tarou Sakamoto pernah menebarkan rasa takut pada setiap penjahat. Tidak ada pembunuh bayaran profesional lain yang menandingi kehebatannya, dan sesama pembunuh memujanya. Namun, Sakamoto jatuh cinta. Dalam lima tahun yang singkat, ia menikah, menjadi seorang ayah, menambah berat badan, dan menukar senjatanya dengan celemek saat ia menjadi pemilik sebuah toko serba ada yang sederhana.\r\n\r\nMeskipun Sakamoto sudah benar-benar pensiun, ia merasa kehidupan kriminalnya yang lama sulit untuk dilepaskan. Mantan rekannya, Shin Asakura, muncul kembali dan memutuskan untuk tinggal bersama keluarga Sakamoto di bawah aturan ketat mereka yang melarang pembunuhan. Lebih buruk lagi, hadiah besar diberikan untuk kepala Sakamoto. Banyak pembunuh sekarang mengejarnya—tetapi mereka akan mendapatkan kejutan. Sakamoto belum kehilangan keunggulannya, dan tidak peduli trik apa pun yang dilakukan musuh-musuhnya, ia akan melawan setiap musuh untuk melindungi keluarganya yang tersayang.', 'anime', '2025', 24, 'Yuto Suzuki', 'https://youtu.be/9TbmxbckSjE?si=bCC16HS9P5RF58it', 'PG-13', 11, 12, '2025-03-07 07:23:14', '2025-03-18 01:17:52'),
+(19, 'INTERSTELLAR', 'interstellar-2014', 'https://asset.tix.id/wp-content/uploads/2025/02/d553ba26-347c-4897-9dbe-42fc7d50989d-600x885.webp', 'Menyambut ulang tahun ke-10, Interstellar tayang kembali di IMAX. Saat waktu di Bumi akan berakhir, sebuah tim penjelajah melakukan sebuah misi paling penting dalam sejarah manusia. Perjalanan antar galaksi ditempuh oleh Cooper (Matthew McConaughey) dan Brand (Anne Hathaway) untuk mengetahui apakah umat manusia masih memiliki masa depan.', 'movies', '2014', 169, 'Jonathan Nolan', 'https://web3.21cineplex.com/movie-trailer/25INX2.mp4', 'PG-13', 1, 2, '2025-03-17 13:46:01', '2025-03-17 13:46:01'),
+(21, 'RUOK 2vs4 FULL HEADSHOT', 'ruok-2vs4-full-headshot-2021', 'https://i.pinimg.com/736x/12/6b/e2/126be204ecf68a438a7c7e3a8302c6f2.jpg', 'Sang ruok bersama BNL membantai squad kroco (letda hypler, budi02, Wawan KMS, Frontal Gaymink) dengan sangat sadis dan mengerikan. Sang Frontal Gaymink sampai kena mental karena letda jadi beban tim dan di hitamkan oleh RUOK.', 'movies', '2021', 999, 'RUOK', 'https://youtu.be/rPzqSHlVdEM?si=Cz5xvIkmswFh_1XE', 'NC-17', 1, 2, '2025-03-20 04:04:57', '2025-03-20 04:05:59');
 
 -- --------------------------------------------------------
 
@@ -244,7 +243,7 @@ INSERT INTO `genres` (`id`, `title`, `slug`, `created_at`, `updated_at`) VALUES
 (3, 'Fantasi', 'fantasi', '2025-02-12 07:12:42', '2025-03-08 10:21:44'),
 (4, 'Horor', 'horor', '2025-02-12 07:12:42', '2025-03-08 10:21:49'),
 (5, 'Aksi', 'aksi', '2025-02-12 07:12:42', '2025-03-08 10:21:55'),
-(6, 'Sci-Fi', 'sci-fi', '2025-02-12 07:12:42', '2025-02-12 07:12:42'),
+(6, 'Fiksi Ilmiah', 'fiksi-ilmiah', '2025-02-12 07:12:42', '2025-03-18 03:31:26'),
 (7, 'Petualangan', 'petualangan', '2025-02-12 07:12:42', '2025-03-08 10:22:03'),
 (8, 'Thriller', 'thriller', '2025-02-12 07:12:42', '2025-03-08 10:23:37'),
 (9, 'Kriminal', 'kriminal', '2025-02-12 07:12:42', '2025-03-08 10:22:45'),
@@ -300,7 +299,16 @@ INSERT INTO `genre_relations` (`id`, `id_film`, `id_genre`, `created_at`, `updat
 (36, 17, 18, '2025-03-09 23:23:42', '2025-03-09 23:23:42'),
 (37, 17, 3, NULL, NULL),
 (38, 17, 7, NULL, NULL),
-(39, 1, 6, NULL, NULL);
+(39, 1, 6, NULL, NULL),
+(40, 19, 1, '2025-03-18 03:32:06', '2025-03-18 03:32:06'),
+(41, 19, 6, '2025-03-18 03:32:06', '2025-03-18 03:32:06'),
+(42, 19, 12, '2025-03-18 03:32:06', '2025-03-18 03:32:06'),
+(43, 19, 7, '2025-03-18 03:32:06', '2025-03-18 03:32:06'),
+(46, 21, 4, '2025-03-20 04:05:20', '2025-03-20 04:05:20'),
+(47, 21, 9, '2025-03-20 04:05:20', '2025-03-20 04:05:20'),
+(48, 21, 12, '2025-03-20 04:05:20', '2025-03-20 04:05:20'),
+(49, 21, 14, '2025-03-20 04:05:20', '2025-03-20 04:05:20'),
+(50, 21, 8, '2025-03-20 04:05:20', '2025-03-20 04:05:20');
 
 -- --------------------------------------------------------
 
@@ -407,27 +415,20 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`id`, `model_type`, `model_id`, `role_id`, `created_at`, `updated_at`) VALUES
-(2, 'App\\Models\\User', 3, 3, NULL, NULL),
-(3, 'App\\Models\\User', 4, 1, NULL, NULL),
-(4, 'App\\Models\\User', 6, 2, NULL, NULL),
 (6, 'App\\Models\\User', 1, 1, NULL, NULL),
-(9, 'App\\Models\\User', 9, 1, NULL, NULL),
 (10, 'App\\Models\\User', 10, 1, NULL, NULL),
-(11, 'App\\Models\\User', 11, 1, NULL, NULL),
 (12, 'App\\Models\\User', 2, 2, NULL, NULL),
-(14, 'App\\Models\\User', 12, 3, NULL, NULL),
 (15, 'App\\Models\\User', 13, 1, NULL, NULL),
-(17, 'App\\Models\\User', 8, 1, NULL, NULL),
 (18, 'App\\Models\\User', 14, 1, NULL, NULL),
-(19, 'App\\Models\\User', 15, 1, NULL, NULL),
-(20, 'App\\Models\\User', 16, 1, NULL, NULL),
-(21, 'App\\Models\\User', 17, 1, NULL, NULL),
 (22, 'App\\Models\\User', 18, 1, NULL, NULL),
-(24, 'App\\Models\\User', 20, 1, NULL, NULL),
 (25, 'App\\Models\\User', 22, 1, NULL, NULL),
 (26, 'App\\Models\\User', 23, 1, NULL, NULL),
 (27, 'App\\Models\\User', 21, 1, NULL, NULL),
-(28, 'App\\Models\\User', 24, 1, NULL, NULL);
+(28, 'App\\Models\\User', 24, 1, NULL, NULL),
+(31, 'App\\Models\\User', 20, 1, NULL, NULL),
+(35, 'App\\Models\\User', 33, 2, NULL, NULL),
+(36, 'App\\Models\\User', 12, 3, NULL, NULL),
+(37, 'App\\Models\\User', 3, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -446,7 +447,7 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
-('akmaloktavian111@gmail.com', '$2y$12$i6Qpp97nVaiENjT0.ZdMCO3rd9tDtUkbcWkTaxyBNyKEZu711yR.e', '2025-03-11 18:31:24'),
+('akmaloktavian111@gmail.com', '$2y$12$dHyewLy2HJZ55XXiKt1YQORoPkbBQ/CtP7E9loby3Rgq5/ElLKlky', '2025-03-18 04:36:42'),
 ('rasy171106@gmail.com', '$2y$12$yWHli5upmGzqaZS4LHt9lOxVnTn2RnUuD4aEidNQcBz4Rc/ljSb6K', '2025-03-09 19:45:47'),
 ('test@example.com', '$2y$12$7GmgGQXUNM5Gm6KqdJX1ROvuU7oWxeXF67I/YqvVQ3ZGqf6vJpi2.', '2025-02-12 19:41:20'),
 ('testtt@example.com', '$2y$12$4My/idNkQT6hYcwO2MSlCuTFgELn9UplkzesXS4ZEA7zh2KCzo2t2', '2025-03-06 17:56:53');
@@ -539,7 +540,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('gxhI8UNoSfhIYsSXtF1v15yVfZLNexjzMpNTDXRb', 2, '162.158.88.164', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidDJIS1p0OVRZRkwzWjBmcHV2VlU2Q0JlSkxFZERmVG1FVHNNV3FvVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9yZXZpZXctZmlsbS5ha21hbGF6YWh3YS5teS5pZC9ob21lIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1742132075);
+('5RTQ9g2Bg77AaJedLhOj8vv0TQDmQabSSpWVroqp', 2, '162.158.163.248', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYkVlbjFQbHROWmNNeVhFejFydG5YWFE5eG9BOGEyMEJxVER2ejBZRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly9yZXZpZXctZmlsbS5ha21hbGF6YWh3YS5teS5pZC9hZG1pbi91c2VycyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1742457814),
+('UsbbyhAhH7iHOXs6M3ay1hGFKlub5k0Nn5vbc6jq', NULL, '172.70.208.155', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMndsVlJLR0JXN2pka1F6aWxvTVdmYkF1SFk2ZTA0dXlFelpWOVl4aSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzI6Imh0dHA6Ly9yZXZpZXctZmlsbS5ha21hbGF6YWh3YS5teS5pZC9kZXRhaWwvcnVvay0ydnM0LWZ1bGwtaGVhZHNob3QtMjAyMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1742454989);
 
 -- --------------------------------------------------------
 
@@ -565,23 +567,16 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Test User', 'test@example.com', '', '2025-02-12 07:12:42', '$2y$12$B6D1ErONZfdMHWhn4O6ebeR0qBcnwOsDuAS8VA/fRyaD8FSP3kh6i', 'cRdwYxDk1h', '2025-02-12 07:12:42', '2025-02-12 07:12:42'),
-(2, 'Admin Kece', 'lostsaga1929@gmail.com', 'avatars/1741283424.jpeg', '2025-03-09 21:40:12', '$2y$12$sXBt.FoQb4KO0/Q5vIq9MO.oVvbRZqeFXFvFVTJUT1UyrFKYKRXdm', 'QvRXr3Fj3DUlb3B3z723FxQcYzYFVy91JhHWijouAo4EGYyTaVtpltgdYigg', '2025-02-12 07:12:42', '2025-03-09 21:40:12'),
-(3, 'Author Ganteng', 'author@example.com', '', NULL, '$2y$12$FV.0Q2g40yBSo0EovzbK1eOEij3Aicg5gPAIRXT5/AtCSGFCv1/g6', '6VrJTiUsRUFIJsDO1wtGlLWD2KVjmw8QL9qZoon7JlSeKwtyKB0JZadftJv6', '2025-02-12 07:12:42', '2025-02-12 07:12:42'),
-(4, 'User Baik', 'user@example.com', 'avatars/1739961175.jpeg', NULL, '$2y$12$iHOauJAAZ/W5lAoqcNGiaOIhae3lxsmR7sgMUlIzf8gW28c.OxBse', 'xa6w48JuLjflZ13ySABtkUb21gT65RRQvau2MqyelwvxWQRptncP0pTDfgNe', '2025-02-12 07:12:42', '2025-03-07 07:02:48'),
-(6, 'nigger', 'niggerjamsut@ireng.co', '', NULL, '$2y$12$c/mCR34CBEYSNBF5mUw./.Hy5Lc0YIck/G5Qt4m55WGgX0rh.7RHu', NULL, '2025-02-18 03:37:01', '2025-02-18 03:37:01'),
-(8, 'Amat Banyak', 'ireng@example.com', '', NULL, '$2y$12$K5w42cduT.UkkxfrwC1sBuF68rEVaZ28cZX3thyI3d5KZ5VKO1ks2', NULL, '2025-02-18 04:07:40', '2025-03-07 12:27:07'),
-(9, 'giyo', 'giyo@example.com', '', NULL, '$2y$12$3fOCLFEdnvUfDqgsCYJXruqUEWkGuq0RjT2N7J4A4o6gUEgX0MYe2', NULL, '2025-02-18 06:50:53', '2025-02-18 06:50:53'),
+(2, 'Admin Kece', 'lostsaga1929@gmail.com', 'avatars/1741283424.jpeg', '2025-03-09 21:40:12', '$2y$12$sXBt.FoQb4KO0/Q5vIq9MO.oVvbRZqeFXFvFVTJUT1UyrFKYKRXdm', 'mrRdLA69V4OzgR2hYKVPtglYFzpLTa1TauSXGXBnySSgAe7bUYkp5QHU980O', '2025-02-12 07:12:42', '2025-03-09 21:40:12'),
+(3, 'Author Ganteng', 'author@g.co', '', NULL, '$2y$12$FV.0Q2g40yBSo0EovzbK1eOEij3Aicg5gPAIRXT5/AtCSGFCv1/g6', 'al0pDm5qv8OijqO0llfC7IuTJN7X3OumPXeTmHJim6TBsJJtvnqEpQAqp7KG', '2025-02-12 07:12:42', '2025-03-20 08:03:34'),
 (10, 'alex', 'alex@gmail.com', '', NULL, '$2y$12$VrDP1BqBTflBupDx7yu2fOoDUPXYOnFYnVFA/XIW0oCIzVMJtuD.W', NULL, '2025-02-18 17:56:34', '2025-02-18 17:56:34'),
-(11, 'User 2', 'testtt@example.com', NULL, NULL, '$2y$12$JvJzHu2v7RcgBAhzvvacMeCTDLKOKYqtmxmXDlruXtZIGDDWqz9QC', NULL, '2025-03-06 17:56:30', '2025-03-07 12:28:19'),
 (12, 'Author Baru', 'author2@example.com', NULL, NULL, '$2y$12$wjLnE7wnflqwQcslTR8AiuHQOw9mQTOIwnpjsRONbX3Fx8GIesgPe', NULL, '2025-03-07 07:12:58', '2025-03-07 07:12:58'),
 (13, 'rafanaufal', 'rafan7750@gmail.com', NULL, NULL, '$2y$12$fwxmLua.TyPjqVJqMJzHFO2L.o5HW1WECim.QkYPxN4ucZT2QeTB.', NULL, '2025-03-07 10:53:04', '2025-03-07 10:53:04'),
 (14, 'rasy', 'rasy171106@gmail.com', NULL, NULL, '$2y$12$nObYgkL8kKI4JV2D2NOq.OsFmRMX1CokkxE0GW6tNKMF//6DtkNSe', NULL, '2025-03-09 19:45:23', '2025-03-09 19:45:23'),
-(15, 'Saya Baik', 'asdjakjdh@asdgh.com', NULL, NULL, '$2y$12$bRBDVkkFqL8Bg5mSUabFku5bO6s5G1eyCMUuvzCrf5xPyqcm8iZlW', NULL, '2025-03-09 20:44:34', '2025-03-09 20:44:34'),
-(16, 'Amal Soleh', 'sfsfsfdsfsfswesfdxersxfd@gmail.com', NULL, NULL, '$2y$12$IdPA82sK2qnkC95dpnI6WuIXWIboN7Iabl7.taKjrpkNIsWVXF5B6', NULL, '2025-03-09 21:16:16', '2025-03-09 21:16:16'),
-(17, 'Akmal Azahwa', 'akmaloktavian111@gmail.com', NULL, '2025-03-09 21:48:06', '$2y$12$RoAaR0ejnzrgc9h1dGXy/uZTWOs9LbIfBHQ.wrrh2YnpMQZUBKqze', NULL, '2025-03-09 21:47:45', '2025-03-09 21:48:06'),
 (18, 'pito', 'savito361@gmail.com', NULL, NULL, '$2y$12$NH0NHFTDxcTURdj7KWm2oO9/JNMlk77F85yZPp4bOvpDjWlPyCaca', NULL, '2025-03-11 18:28:34', '2025-03-11 18:28:34'),
-(20, 'Pukimak', 'akmalxyz211@gmail.com', NULL, '2025-03-11 18:49:19', '$2y$12$WjlYlsZIQxYS94zmzRX74.w/dP7FYe0Lo06g0GzVMXbqqubjvcUQS', NULL, '2025-03-11 18:47:18', '2025-03-11 18:49:19'),
-(24, 'luqman', 'luqmanasyari684@gmail.com', NULL, '2025-03-15 17:14:56', '$2y$12$I1wZgsHBnaHQEcedU1CPqeBvfo0RYKlLenZtg1lpQzAuZsp87YCju', NULL, '2025-03-15 16:35:44', '2025-03-15 17:14:56');
+(20, 'Solihin', 'akmalxyz211@gmail.com', NULL, '2025-03-11 18:49:19', '$2y$12$WjlYlsZIQxYS94zmzRX74.w/dP7FYe0Lo06g0GzVMXbqqubjvcUQS', NULL, '2025-03-11 18:47:18', '2025-03-16 18:16:18'),
+(24, 'luqman', 'luqmanasyari684@gmail.com', NULL, '2025-03-15 17:14:56', '$2y$12$I1wZgsHBnaHQEcedU1CPqeBvfo0RYKlLenZtg1lpQzAuZsp87YCju', NULL, '2025-03-15 16:35:44', '2025-03-15 17:14:56'),
+(33, 'Admin Demo', 'admin@g.co', NULL, NULL, '$2y$12$63sh5d7lsVDa/ewklXflqOP8hZgiuVIoS.CmVKzhNl71oetfFsVQO', NULL, '2025-03-20 07:56:59', '2025-03-20 07:56:59');
 
 --
 -- Indexes for dumped tables
@@ -726,13 +721,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `castings`
 --
 ALTER TABLE `castings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -744,7 +739,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `films`
 --
 ALTER TABLE `films`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -756,7 +751,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `genre_relations`
 --
 ALTER TABLE `genre_relations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -780,7 +775,7 @@ ALTER TABLE `model_has_permissions`
 -- AUTO_INCREMENT for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -804,7 +799,7 @@ ALTER TABLE `role_has_permissions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
@@ -820,8 +815,8 @@ ALTER TABLE `castings`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_id_film_foreign` FOREIGN KEY (`id_film`) REFERENCES `films` (`id`),
-  ADD CONSTRAINT `comments_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `comments_id_film_foreign` FOREIGN KEY (`id_film`) REFERENCES `films` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `films`
