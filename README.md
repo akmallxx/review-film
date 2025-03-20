@@ -1,4 +1,4 @@
-pertama import `review_film.sql` , karena migration belum menyesuaikan dengan database yang baru
+pertama import `review_film.sql` , karena migration belum menyesuaikan dengan struktur database yang baru
 
 ## Install package
 ```sh
