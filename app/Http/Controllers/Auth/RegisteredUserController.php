@@ -50,25 +50,7 @@ class RegisteredUserController extends Controller
             ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:5120'],
-            'cf-turnstile-response' => 'required', // Cloudflare Turnstile
-        ], [
-            'cf-turnstile-response.required' => __('captcha diperlukan.'),
         ]);
-    
-        // Verifikasi Cloudflare Turnstile
-        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-            'secret' => env('TURNSTILE_SECRET_KEY'),
-            'response' => $request->input('cf-turnstile-response'),
-            'remoteip' => $request->ip(),
-        ]);
-    
-        $result = $response->json();
-    
-        if (!$result['success']) {
-            throw ValidationException::withMessages([
-                'cf-turnstile-response' => 'Verifikasi gagal, coba lagi.',
-            ]);
-        }
     
         // Proses Avatar (jika ada)
         if ($request->hasFile('avatar')) {

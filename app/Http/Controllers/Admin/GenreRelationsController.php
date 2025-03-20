@@ -32,6 +32,16 @@ class GenreRelationsController extends Controller
         return view('admin.genre-relations.create', compact('genres', 'filmList'));
     }
 
+    public function edit($id)
+    {
+        $film = Film::findOrFail($id);
+        $filmList = Film::all();
+        $genres = Genre::orderBy('title', 'asc')->get();
+        $selectedGenres = $film->genres->pluck('id')->toArray();
+
+        return view('admin.genre-relations.create', compact('film', 'filmList', 'genres', 'selectedGenres'));
+    }
+
     public function store(Request $request)
     {
         // Validasi input
@@ -51,16 +61,6 @@ class GenreRelationsController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect()->route('admin.genre-relations')->with('success', 'Genre berhasil ditambahkan!');
-    }
-
-    public function edit($id)
-    {
-        $film = Film::findOrFail($id);
-        $filmList = Film::all();
-        $genres = Genre::orderBy('title', 'asc')->get();
-        $selectedGenres = $film->genres->pluck('id')->toArray();
-
-        return view('admin.genre-relations.create', compact('film', 'filmList', 'genres', 'selectedGenres'));
     }
 
     public function update(Request $request, $id)

@@ -30,12 +30,25 @@
                 <div class="flex">
                     <!-- Dropdown Filter Genre -->
                     <div class="shrink-0">
-                        <select name="genre" class="ps-4 pe-4 py-3 text-black border-gray-300 bg-gray-100 rounded-s-md focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
-                            <option value="" disable>Pilih Genre</option>
+                        <select name="genre" class="ps-4 pe-0 py-3 text-black border-gray-300 bg-gray-100 rounded-s-md focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
+                            <option value="">Pilih Genre</option>
                             @foreach ($genres as $genre)
                             <option value="{{ $genre->slug }}"
                                 {{ isset($search_genre) && $search_genre == $genre->slug ? 'selected' : '' }}>
                                 {{ $genre->title }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- Dropdown FIlter Tahun --}}
+                    <div class="shrink-0">
+                        <select name="tahun" class="ps-4 pe-8 py-3 text-black border-gray-300 bg-gray-100 focus:ring-0 focus:border-red-500 dark:bg-neutral-800 dark:text-white dark:border-black dark:focus:border-red-500">
+                            <option value="">Pilih Tahun</option>
+                            @foreach ($tahuns as $tahun)
+                            <option value="{{ $tahun->tahun_rilis }}"
+                                {{ isset($search_tahun) && $search_tahun == $tahun->tahun_rilis ? 'selected' : '' }}>
+                                {{ $tahun->tahun_rilis }}
                             </option>
                             @endforeach
                         </select>
@@ -57,7 +70,7 @@
             </form>
         </div>
 
-        @if(isset($search) || isset($search_genre))
+        @if(isset($search) || isset($search_genre) || isset($search_tahun))
         <!-- Tampilan Hasil Pencarian -->
         @if($films->isEmpty())
         <p class="text-center text-gray-600 dark:text-gray-300">Tidak ada film yang ditemukan.</p>
@@ -116,7 +129,7 @@
                         <a href="{{ route('film.detail', $movie->slug) }}" class="block">
                             <div class="w-full relative">
                                 <!-- Badge Total Rating -->
-                                <div class="absolute top-2 left-2 bg-red-800 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg z-10">
+                                <div class="absolute top-2 left-2 bg-red-700 bg-opacity-80 text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg z-10">
                                     ⭐ {{ number_format($movie->average_rating, 1) }}
                                 </div>
 

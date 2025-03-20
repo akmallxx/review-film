@@ -2,6 +2,11 @@
 
 @section('title', 'CRUD Film')
 
+@section('styles')
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+@endsection
+
 @section('content')
     <h2 class="text-3xl font-bold text-neutral-900 dark:text-white mb-8">Edit Film</h2>
     <div class="p-4 md:p-5 space-y-4">
@@ -105,6 +110,17 @@
                 </div>
             </div>
 
+            <div class="mb-5">
+                <label class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white">Genre</label>
+                <select id="genre-select" name="id_genre[]" multiple class="w-full border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
+                    @foreach($genres as $genreItem)
+                        <option value="{{ $genreItem->id }}" {{ isset($selectedGenres) && in_array($genreItem->id, $selectedGenres) ? 'selected' : '' }}>
+                            {{ $genreItem->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
             <a href="{{ route('admin.film') }}" class="py-2.5 px-5 ms-3 text-sm font-medium text-neutral-900 focus:outline-none bg-white rounded-lg border border-neutral-200 hover:bg-neutral-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-neutral-100 dark:focus:ring-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:border-neutral-600 dark:hover:text-white dark:hover:bg-neutral-700">Batal</a>
         </form>
@@ -113,18 +129,42 @@
 
 @section('scripts')
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        new TomSelect("#genre-select", {
+            plugins: ['remove_button'], // Menambahkan tombol hapus
+            persist: false,
+            create: false,
+            maxItems: null,
+            placeholder: "Pilih genre...",
+        });
+    });
+</script>
+
+<script>
     function togglePosterInput(method) {
-        if (method === 'url') {
-            document.getElementById('poster_url').style.display = 'block';
-            document.getElementById('poster_url_input').required = true;
-            document.getElementById('poster_upload').style.display = 'none';
-            document.getElementById('poster_file_input').required = false;
-        } else {
-            document.getElementById('poster_url').style.display = 'none';
-            document.getElementById('poster_url_input').required = false;
-            document.getElementById('poster_upload').style.display = 'block';
-            document.getElementById('poster_file_input').required = true;
-        }
+    let urlSection = document.getElementById('poster_url');
+    let urlInput = document.getElementById('poster_url_input');
+    let fileSection = document.getElementById('poster_upload');
+    let fileInput = document.getElementById('poster_file_input');
+
+    if (method === 'url') {
+        urlSection.style.display = 'block';
+        urlInput.required = true;
+        urlInput.disabled = false; // Aktifkan input URL
+
+        fileSection.style.display = 'none';
+        fileInput.required = false;
+        fileInput.disabled = true; // Nonaktifkan input file
+    } else {
+        urlSection.style.display = 'none';
+        urlInput.required = false;
+        urlInput.disabled = true; // Nonaktifkan input URL
+
+        fileSection.style.display = 'block';
+        fileInput.required = true;
+        fileInput.disabled = false; // Aktifkan input file
     }
+}
+
 </script>
 @endsection

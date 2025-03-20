@@ -18,15 +18,22 @@ class HomeController extends Controller
     {
         $search = $request->input('search');
         $search_genre = $request->input('genre');
+        $search_tahun = $request->input('tahun');
+        
         $genres = Genre::all();
+        $tahuns = Film::select('tahun_rilis')->orderBy('tahun_rilis', 'desc')->distinct()->get();
 
-        if ($search || $search_genre) {
+        if ($search || $search_genre || $search_tahun) {
             $films = Film::query();
 
             if ($search) {
                 $films = $films->where('slug', 'like', '%' . $search . '%');
             }
 
+            if ($search_tahun) {
+                $films = $films->where('slug', 'like', '%-' . $search_tahun);
+            }
+            
             if ($search_genre) {
                 $films = $films->whereHas('genres', function ($query) use ($search_genre) {
                     $query->where('slug', 'like', '%' . $search_genre . '%');
@@ -40,7 +47,7 @@ class HomeController extends Controller
                 $film->average_rating = $this->calculateAverageRating($film->id);
             });
 
-            return view('home', compact('films', 'search', 'search_genre', 'genres'));
+            return view('home', compact('films', 'search', 'search_genre', 'search_tahun', 'genres', 'tahuns'));
         } else {
             $populars = Film::withCount('comments')->orderByDesc('comments_count')->take(12)->get();
             $movies = Film::latest()->where('kategori_film', 'movies')->take(12)->get();
@@ -64,7 +71,7 @@ class HomeController extends Controller
                 $anime->average_rating = $this->calculateAverageRating($anime->id);
             });
 
-            return view('home', compact('movies', 'series', 'animes', 'genres'));
+            return view('home', compact('movies', 'series', 'animes', 'genres', 'tahuns'));
         }
     }
 

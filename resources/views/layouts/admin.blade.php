@@ -41,6 +41,8 @@
             localStorage.setItem("theme", "dark"); // Simpan preferensi default ke dark
         }
     </script>
+
+    @yield('styles')
 </head>
 
 <body class="bg-neutral-200 dark:bg-neutral-950">
@@ -49,7 +51,7 @@
         @include('layouts.admin.sidebar')
         <div class="flex-1 flex flex-col">
             <main class="p-6">
-                <div class="bg-neutral-100 dark:bg-neutral-700 p-6 rounded shadow-md ms-64 mt-16">
+                <div class="bg-neutral-100 dark:bg-neutral-900 p-6 rounded shadow-md ms-64 mt-16">
                     @yield('content')
                 </div>
             </main>
@@ -75,6 +77,16 @@
             title: 'Success!',
             text: "{!! session('success') !!}",
             icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: "{!! session('error') !!}",
+            icon: 'error',
             confirmButtonText: 'OK'
         });
     </script>

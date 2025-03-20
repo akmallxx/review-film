@@ -25,24 +25,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Validasi Turnstile response
-        $request->validate([
-            'cf-turnstile-response' => 'required',
-        ], [
-            'cf-turnstile-response.required' => __('captcha diperlukan'),
-        ]);
-    
-        // Verifikasi token ke Cloudflare Turnstile API
-        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-            'secret' => env('TURNSTILE_SECRET_KEY'),
-            'response' => $request->input('cf-turnstile-response'),
-            'remoteip' => $request->ip(),
-        ])->json();
-    
-        if (!$response['success']) {
-            return back()->withErrors(['cf-turnstile-response' => __('turnstile-failed')]);
-        }
-    
         // Otentikasi pengguna
         $request->authenticate();
         $request->session()->regenerate();
